@@ -1,0 +1,1877 @@
+<title>KER — Voir plus loin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="KER, la plateforme de résilience opérationnelle face aux crises. Anticiper. Décider. Coordonner. Santé, collectivités, industrie.">
+<link rel="icon" type="image/png" href="__IMG_icon__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout : récit vertical alternant scènes sombres immersives (bleu-noir) et panneaux de lecture clairs ;
+   grille 12 colonnes desktop / 4 colonnes mobile ; l'orange est réservé aux actions, connexions et inflexions.
+   Thème volontairement unique : l'alternance sombre/clair est imposée par le cahier des charges (§4.2). */
+:root{
+  color-scheme: light;
+  /* Couleurs — PROVISOIRES : prélevées sur la planche PNG, à remplacer par les HEX des fichiers vectoriels maîtres */
+  --night:#102230;        /* bleu-noir de la planche */
+  --night-deep:#0a1620;
+  --night-line:#21384a;
+  --paper:#f6f5f2;        /* fond clair de la planche */
+  --white:#ffffff;
+  --ink:#102230;
+  --ink-soft:#4a5966;
+  --mist:#9fb0bd;         /* texte secondaire sur fond sombre */
+  --orange:#f45a0a;       /* accent : actions, connexions */
+  --orange-ink:#b13f00;   /* orange lisible sur fond clair (AA) */
+  --line:#d9dcdf;
+  /* Couleurs d'état métier (jamais utilisées comme accent de marque) */
+  --state-red:#c62828; --state-amber:#b26a00; --state-green:#2e7d32;
+  /* Typographies — famille exacte à confirmer via la charte */
+  --f-display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Échelle */
+  --t-hero:clamp(2.4rem, 1.4rem + 4.6vw, 5.2rem);
+  --t-h2:clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+  --t-h3:clamp(1.1rem, 1rem + .4vw, 1.3rem);
+  --t-body:1.0625rem;
+  --t-small:.875rem;
+  --t-label:.75rem;
+  /* Motion */
+  --dur-fast:180ms; --dur:420ms; --ease:cubic-bezier(.2,.7,.2,1);
+  --maxw:1200px;
+  --header-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:var(--t-body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--night)}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{font-family:var(--f-display);font-stretch:112%;line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h2{font-size:var(--t-h2);font-weight:700}
+h3{font-size:var(--t-h3);font-weight:650;font-stretch:105%}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:2px}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--orange);color:var(--night);padding:10px 14px;font-weight:600;text-decoration:none}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+
+/* Bandes et conteneur */
+.band{padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:clamp(64px, 9vw, 128px);position:relative}
+.band--dark{background:var(--night);color:var(--white);color-scheme:dark}
+.band--deep{background:var(--night-deep);color:var(--white);color-scheme:dark}
+.band--light{background:var(--white);color:var(--ink)}
+.band--paper{background:var(--paper);color:var(--ink)}
+.wrap{max-width:var(--maxw);margin-inline:auto;position:relative}
+.eyebrow{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;display:flex;gap:.75em;align-items:center;margin-bottom:1.25rem}
+.eyebrow b{font-weight:500;color:var(--orange)}
+.band--light .eyebrow b,.band--paper .eyebrow b{color:var(--orange-ink)}
+.eyebrow::after{content:"";height:1px;width:48px;background:currentColor;opacity:.35}
+.lede{font-size:clamp(1.05rem, 1rem + .3vw, 1.2rem);max-width:62ch;margin-top:1.25rem}
+.band--dark .lede,.band--deep .lede{color:#d4dde4}
+.band--light .lede,.band--paper .lede{color:var(--ink-soft)}
+.note{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.04em;line-height:1.5}
+.badge{display:inline-flex;align-items:center;gap:.5em;font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.06em;text-transform:uppercase;padding:.35em .7em;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
+.badge--demo{color:var(--orange-ink)}
+.band--dark .badge--demo,.band--deep .badge--demo{color:var(--orange)}
+.badge--todo{color:var(--state-amber);border-style:dashed}
+.band--dark .badge--todo,.band--deep .badge--todo{color:#f0b35a}
+.badge--ok{color:var(--state-green)}
+.band--dark .badge--ok,.band--deep .badge--ok{color:#7fd08a}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:48px;padding:.8em 1.4em;font-family:var(--f-body);font-weight:600;font-size:1rem;text-decoration:none;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:background var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast),transform var(--dur-fast)}
+.btn--primary{background:var(--orange);color:var(--night)}
+.btn--primary:hover{background:#ff7428}
+.btn--ghost{border-color:currentColor;background:transparent;color:inherit}
+.btn--ghost:hover{background:rgba(255,255,255,.08)}
+.band--light .btn--ghost:hover,.band--paper .btn--ghost:hover{background:rgba(16,34,48,.06)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Header */
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(10,22,32,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);color:var(--white);padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.header__in{max-width:var(--maxw);margin-inline:auto;height:var(--header-h);display:flex;align-items:center;gap:24px}
+.header__logo{display:block;flex:none}
+.header__logo img{height:26px;width:auto}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{font-size:.95rem;text-decoration:none;padding:.5em .8em;border-radius:3px;color:#d4dde4}
+.nav a:hover,.nav a[aria-current="true"]{color:var(--white);background:rgba(255,255,255,.07)}
+.nav a[aria-current="true"]{box-shadow:inset 0 -2px 0 var(--orange)}
+.header .btn{min-height:40px;padding:.5em 1em;font-size:.92rem}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.3);color:var(--white);border-radius:3px;min-height:40px;padding:0 12px;font:inherit;font-size:.9rem;cursor:pointer}
+@media (max-width: 900px){
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--night-deep);border-bottom:1px solid rgba(255,255,255,.1);padding:8px max(16px, env(safe-area-inset-right,0px)) 16px max(16px, env(safe-area-inset-left,0px))}
+  .nav.is-open{display:flex}
+  .nav a{padding:.9em .6em;border-bottom:1px solid rgba(255,255,255,.06)}
+  .menu-btn{display:inline-flex;align-items:center}
+  .header__cta{display:none}
+}
+
+/* Indicateur de chapitre */
+.chapters{position:fixed;right:max(18px, env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:none;flex-direction:column;gap:4px;mix-blend-mode:normal}
+.chapters a{display:flex;align-items:center;justify-content:flex-end;gap:10px;text-decoration:none;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--mist);padding:3px 0}
+.chapters a span{opacity:0;transform:translateX(6px);transition:opacity var(--dur-fast),transform var(--dur-fast);background:var(--night-deep);color:var(--white);padding:2px 8px;border-radius:2px;white-space:nowrap}
+.chapters a i{display:block;width:18px;height:2px;background:#7d8f9c;transition:width var(--dur-fast),background var(--dur-fast)}
+.chapters a:hover span,.chapters a:focus-visible span,.chapters a[aria-current="true"] span{opacity:1;transform:none}
+.chapters a[aria-current="true"] i{width:30px;background:var(--orange)}
+@media (min-width: 1320px){.chapters{display:flex}}
+
+/* 00 — Hero */
+.hero{padding-top:clamp(48px, 7vw, 96px);padding-bottom:0;overflow:hidden;background:radial-gradient(120% 80% at 50% 105%, #17344a 0%, var(--night) 55%)}
+.hero__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:end}
+.hero__text{grid-column:1 / span 8;min-width:0}
+.hero__logo{width:min(360px, 70vw);margin-bottom:clamp(28px, 4vw, 48px)}
+.hero h1{font-size:var(--t-hero);font-weight:750;font-stretch:118%;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero__def{font-family:var(--f-display);font-stretch:108%;font-weight:500;font-size:clamp(1.15rem, 1rem + .7vw, 1.55rem);margin-top:1.25rem;color:var(--white);max-width:34ch}
+.hero__sub{color:#c6d1da;margin-top:.9rem;max-width:56ch}
+.signature{display:flex;flex-wrap:wrap;align-items:center;gap:.4em 1.1em;font-family:var(--f-display);font-stretch:118%;font-weight:500;font-size:.9rem;letter-spacing:.24em;text-transform:uppercase;margin-top:1.75rem}
+.signature span+span::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--orange);margin-right:1.1em;vertical-align:middle;transform:translateY(-2px)}
+.hero .btn-row{margin-top:2rem}
+.hero__aside{grid-column:9 / span 4;min-width:0;border-left:1px solid var(--night-line);padding-left:24px;display:grid;gap:18px;font-size:var(--t-small);color:#c6d1da}
+.hero__aside dt{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.hero__aside dd{margin:4px 0 0;color:var(--white)}
+.horizon{position:relative;height:clamp(220px, 30vw, 360px);margin-top:clamp(40px, 6vw, 72px);margin-inline:calc(-1 * max(16px, env(safe-area-inset-left,0px)))}
+.horizon canvas{position:absolute;inset:0;width:100%;height:100%}
+.horizon__labels{position:absolute;inset:0;pointer-events:none}
+.horizon__labels span{position:absolute;transform:translate(-50%,-100%);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--white);padding:3px 8px;border:1px solid rgba(244,90,10,.6);background:rgba(10,22,32,.75);border-radius:2px;white-space:nowrap;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.js .horizon__labels span{opacity:calc(.35 + var(--p,0) * 1.6)}
+@media (max-width: 900px){
+  .hero__text,.hero__aside{grid-column:1 / -1}
+  .hero__aside{border-left:0;border-top:1px solid var(--night-line);padding:20px 0 0;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .horizon__labels span:nth-child(n+4){display:none}
+}
+
+/* 01 — Propagation */
+.split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,4vw,56px);align-items:center}
+.split__text{grid-column:1 / span 5;min-width:0}
+.split__visual{grid-column:6 / span 7;min-width:0}
+@media (max-width: 900px){.split__text,.split__visual{grid-column:1 / -1}}
+.pains{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:0}
+.pains li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--night-line)}
+.pains li:last-child{border-bottom:1px solid var(--night-line)}
+.pains svg{width:22px;height:22px;color:var(--orange);margin-top:2px}
+.pains strong{display:block;font-weight:600}
+.pains span{color:#b8c5cf;font-size:var(--t-small)}
+.net{width:100%;height:auto;overflow:visible}
+.net .lnk{stroke:#5c7486;stroke-width:1.5;fill:none;transition:stroke var(--dur) var(--ease),stroke-dasharray var(--dur) var(--ease),opacity var(--dur)}
+.net .lnk{stroke-dasharray:3 9;opacity:.55}
+.net.is-whole .lnk{stroke:#9ab0c0;stroke-dasharray:none;opacity:1}
+.net .dep{stroke:var(--orange);stroke-width:1.5;stroke-dasharray:6 6;fill:none;opacity:1;transition:opacity var(--dur)}
+.net.is-whole .dep{opacity:0}
+.net .site{transition:transform 700ms var(--ease)}
+.net.is-whole .site{transform:none!important}
+.net .site rect{fill:var(--night-deep);stroke:#5c7486;stroke-width:1.2}
+.net .site text,.net .sys text{font-family:var(--f-mono);font-size:11px;fill:#d4dde4;letter-spacing:.04em}
+.net .sys rect{fill:none;stroke:var(--orange);stroke-width:1.2;stroke-dasharray:3 3}
+.net .sys text{fill:var(--orange)}
+.net .warn{fill:var(--orange);transition:opacity var(--dur)}
+.net.is-whole .warn{opacity:0}
+.net-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;color:#b8c5cf;font-size:var(--t-small)}
+.net-legend span{display:inline-flex;align-items:center;gap:8px}
+.net-legend i{display:inline-block;width:28px;height:0;border-top:1.5px dashed #5c7486}
+.net-legend i.o{border-top-color:var(--orange)}
+.net-state{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.net-state button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--white);background:transparent;border:1px solid var(--night-line);padding:6px 10px;border-radius:2px;cursor:pointer}
+.net-state button[aria-pressed="true"]{border-color:var(--orange);color:var(--orange)}
+
+/* 02 — Moteur */
+.engine{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,4vw,56px);margin-top:clamp(40px,5vw,64px)}
+.engine__visual{grid-column:1 / span 5;min-width:0}
+.engine__steps{grid-column:7 / span 6;min-width:0;list-style:none;padding:0;margin:0;counter-reset:s}
+.engine__card{position:sticky;top:calc(var(--header-h) + 32px);background:var(--night);color:var(--white);border-radius:4px;padding:28px}
+.phases{display:grid;grid-template-columns:2fr 2fr 1fr;gap:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);margin-bottom:20px}
+.phases span{border-top:2px solid var(--night-line);padding-top:6px;transition:color var(--dur),border-color var(--dur)}
+.phases span.is-on{color:var(--white);border-color:var(--orange)}
+.verbs{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.verbs li{display:grid;grid-template-columns:36px 1fr;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--night-line);border-radius:3px;font-family:var(--f-display);font-stretch:112%;font-weight:600;font-size:1.05rem;transition:border-color var(--dur),background var(--dur),color var(--dur);color:#9fb0bd}
+.verbs li small{font-family:var(--f-mono);font-size:11px;font-weight:400;color:inherit}
+.verbs li.is-on{border-color:var(--orange);background:rgba(244,90,10,.1);color:var(--white)}
+.engine__who{margin-top:20px;border-top:1px solid var(--night-line);padding-top:16px;display:grid;gap:10px;font-size:var(--t-small);min-height:7.5em}
+.engine__who div{display:grid;grid-template-columns:76px 1fr;gap:10px}
+.engine__who dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);padding-top:2px}
+.engine__who dd{margin:0}
+.engine__who .you dd{color:var(--white);font-weight:600}
+.step{padding:28px 0 32px;border-top:1px solid var(--line);display:grid;grid-template-columns:56px 1fr;gap:16px;transition:opacity var(--dur)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.js .step{opacity:.55}
+.js .step.is-on{opacity:1}
+.step__n{font-family:var(--f-mono);font-size:var(--t-small);color:var(--orange-ink);padding-top:4px}
+.step h3{font-size:clamp(1.3rem,1.1rem + .8vw,1.75rem)}
+.step h3 small{display:block;font-family:var(--f-body);font-size:var(--t-small);font-weight:500;color:var(--ink-soft);margin-top:6px;letter-spacing:0}
+.step p{margin-top:.8rem;color:var(--ink-soft);max-width:52ch}
+.who{margin-top:1rem;display:grid;gap:8px;font-size:var(--t-small)}
+.who div{display:grid;grid-template-columns:64px 1fr;gap:10px}
+.who dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding-top:2px}
+.who dd{margin:0}
+.who .you dd{font-weight:600}
+.human{margin-top:clamp(32px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:20px 24px;border:1px solid var(--line);border-left:3px solid var(--orange);background:var(--paper);max-width:760px}
+.human svg{width:28px;height:28px;color:var(--orange-ink)}
+.human p{color:var(--ink-soft);font-size:.98rem}
+.human strong{color:var(--ink)}
+@media (max-width: 900px){
+  .engine__visual{display:none}
+  .engine__steps{grid-column:1 / -1}
+  .js .step{opacity:1}
+}
+
+/* 03 — Interface */
+.shot{position:relative;margin-top:clamp(36px,4vw,56px)}
+.frame{background:var(--white);border:1px solid var(--line);border-radius:6px;box-shadow:0 30px 60px -30px rgba(16,34,48,.35),0 2px 6px rgba(16,34,48,.06);overflow:hidden}
+.frame__bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);background:#fbfbfa}
+.frame__bar i{width:9px;height:9px;border-radius:50%;background:#d6d9dc}
+.frame__bar span{margin-left:8px}
+.zoom{position:relative;overflow:hidden;aspect-ratio:1000 / 638;max-width:100%}
+.zoom img{width:100%;height:100%;object-fit:cover;transform-origin:var(--ox,50%) var(--oy,50%);transform:scale(var(--z,1));transition:transform 650ms var(--ease)}
+.hotspot{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--orange);color:var(--night);border:3px solid var(--white);font-family:var(--f-mono);font-weight:500;font-size:13px;cursor:pointer;box-shadow:0 0 0 6px rgba(244,90,10,.25);transition:opacity var(--dur),transform var(--dur-fast)}
+.hotspot:hover{transform:translate(-50%,-50%) scale(1.1)}
+.zoomed .hotspot{opacity:0;pointer-events:none}
+.shot__tools{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:14px}
+.chip{font:inherit;font-size:var(--t-small);border:1px solid var(--line);background:var(--white);color:var(--ink);padding:8px 12px;border-radius:3px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;min-height:40px}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{border-color:var(--orange-ink);color:var(--orange-ink);box-shadow:inset 0 -2px 0 var(--orange)}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.reads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+.read{padding:22px 22px 22px 0;border-bottom:1px solid var(--line);min-width:0;transition:background var(--dur)}
+.read+.read{padding-left:22px;border-left:1px solid var(--line)}
+.read.is-on{background:linear-gradient(var(--orange),var(--orange)) top left/100% 3px no-repeat}
+.read h3{font-size:1.1rem;display:flex;gap:10px;align-items:baseline}
+.read h3 span{font-family:var(--f-mono);font-size:var(--t-small);color:var(--orange-ink)}
+.read dl{margin:14px 0 0;display:grid;gap:12px;font-size:var(--t-small)}
+.read dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.read dd{margin:2px 0 0}
+.source{margin-top:18px;color:var(--ink-soft)}
+@media (max-width: 900px){
+  .reads{grid-template-columns:1fr}
+  .read+.read{padding-left:0;border-left:0}
+  .hotspot{width:28px;height:28px;font-size:12px}
+}
+
+/* Transition cas d'usage */
+.twin{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--night-line);margin-top:clamp(36px,4vw,56px);border:1px solid var(--night-line)}
+.twin a{display:block;background:var(--night);padding:28px;text-decoration:none;transition:background var(--dur-fast)}
+.twin a:hover{background:#142b3c}
+.twin .note{color:var(--orange)}
+.twin h3{margin-top:10px;font-size:clamp(1.2rem,1rem + .8vw,1.6rem)}
+.twin p{color:#b8c5cf;margin-top:10px;font-size:var(--t-small)}
+.twin .arrow{margin-top:18px;font-family:var(--f-mono);font-size:var(--t-small);color:var(--white)}
+.scale{display:flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--f-mono);font-size:11px;color:var(--mist)}
+.scale i{flex:1;height:2px;background:linear-gradient(90deg,var(--orange),rgba(244,90,10,.15))}
+@media (max-width: 700px){.twin{grid-template-columns:1fr}}
+
+/* 04 — Canicule */
+.timeline{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,4vw,56px);margin-top:clamp(40px,5vw,64px)}
+.rail{grid-column:1 / span 3;min-width:0}
+.rail ol{position:sticky;top:calc(var(--header-h) + 40px);list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--line);display:grid;gap:22px}
+.rail li{position:relative}
+.rail li::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--white);border:2px solid var(--line);transition:background var(--dur),border-color var(--dur)}
+.rail li.is-on::before{background:var(--orange);border-color:var(--orange)}
+.rail a{text-decoration:none;display:block}
+.rail b{font-family:var(--f-mono);font-weight:500;font-size:1.05rem;display:block;font-variant-numeric:tabular-nums}
+.rail span{font-size:var(--t-small);color:var(--ink-soft)}
+.rail li.is-on b{color:var(--orange-ink)}
+.chapters-c{grid-column:4 / span 9;min-width:0;display:grid;gap:clamp(48px,6vw,96px)}
+.chap{display:grid;gap:18px;scroll-margin-top:calc(var(--header-h) + 24px)}
+.chap__head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:baseline}
+.chap__t{font-family:var(--f-mono);font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem);font-weight:500;color:var(--orange-ink);font-variant-numeric:tabular-nums}
+.chap h3{font-size:clamp(1.2rem,1rem + .6vw,1.5rem)}
+.chap__cap{max-width:60ch;color:var(--ink-soft)}
+.chap__cap strong{color:var(--ink);font-weight:600}
+.placeholder{aspect-ratio:16 / 9;max-width:100%;border:1.5px dashed #b9c1c8;border-radius:6px;background:repeating-linear-gradient(135deg,#f6f5f2 0 12px,#f1efeb 12px 24px);display:grid;place-content:center;text-align:center;gap:8px;padding:20px;color:var(--ink-soft)}
+.placeholder strong{font-family:var(--f-display);font-stretch:108%;color:var(--ink);font-size:1.05rem}
+.placeholder .note{color:var(--ink-soft)}
+.shotbtn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;text-align:left;font:inherit;color:inherit}
+.shotbtn:focus-visible{outline-offset:4px}
+.shotbtn .frame{transition:box-shadow var(--dur-fast)}
+.shotbtn:hover .frame{box-shadow:0 30px 60px -24px rgba(16,34,48,.45),0 0 0 2px var(--orange)}
+.demo-note{display:flex;gap:12px;align-items:flex-start;margin-top:clamp(32px,4vw,48px);padding:16px 18px;background:var(--paper);border:1px solid var(--line);font-size:var(--t-small);color:var(--ink-soft);max-width:760px}
+@media (max-width: 900px){
+  .rail{display:none}
+  .chapters-c{grid-column:1 / -1}
+}
+
+/* 05 — Domino */
+.domino{list-style:none;margin:clamp(40px,5vw,64px) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:d}
+.tier{position:relative;border:1px solid var(--night-line);border-radius:3px;padding:20px 18px 22px;background:rgba(255,255,255,.02);transition:border-color var(--dur),background var(--dur),transform var(--dur) var(--ease);min-width:0}
+.tier::after{content:"";position:absolute;top:38px;right:-15px;width:16px;height:2px;background:var(--night-line);transition:background var(--dur)}
+.tier:last-child::after{display:none}
+.tier.is-hit{border-color:var(--orange);background:rgba(244,90,10,.08)}
+.tier.is-hit::after{background:var(--orange)}
+.tier__n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--mist);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.tier__n i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mist);transition:background var(--dur),border-color var(--dur)}
+.tier.is-hit .tier__n i{background:var(--orange);border-color:var(--orange)}
+.tier h3{margin-top:12px;font-size:1.15rem}
+.tier__what{margin-top:8px;font-size:var(--t-small);color:#d4dde4}
+.tier dl{margin:16px 0 0;display:grid;gap:12px;font-size:var(--t-small)}
+.tier dt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.tier dd{margin:3px 0 0;color:#c6d1da}
+.tier dd.repli{color:var(--white)}
+.tier dd.repli::before{content:"↳ ";color:var(--orange)}
+.domino-foot{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;margin-top:clamp(28px,3vw,40px);align-items:start}
+.domino-foot>p{grid-column:1 / span 7;color:#c6d1da;max-width:64ch}
+.domino-foot>div{grid-column:9 / span 4;display:flex;justify-content:flex-end}
+@media (max-width: 1000px){
+  .domino{grid-template-columns:1fr;gap:10px}
+  .tier{display:grid;grid-template-columns:1fr;padding-left:44px}
+  .tier::before{content:"";position:absolute;left:20px;top:22px;bottom:-12px;width:2px;background:var(--night-line)}
+  .tier:last-child::before{bottom:22px}
+  .tier.is-hit::before{background:var(--orange)}
+  .tier::after{display:none}
+  .tier__n i{position:absolute;left:15px;top:20px;background:var(--night)}
+  .domino-foot>p,.domino-foot>div{grid-column:1 / -1;justify-content:flex-start}
+}
+
+/* 06 — Orchestration */
+.tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line);margin-top:clamp(32px,4vw,48px)}
+.tab{font:inherit;font-weight:600;font-size:.98rem;background:none;border:0;border-bottom:3px solid transparent;color:var(--ink-soft);padding:14px 18px 11px;cursor:pointer;display:flex;gap:10px;align-items:baseline;min-height:48px}
+.tab small{font-family:var(--f-mono);font-weight:400;font-size:11px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--orange)}
+.band--dark .tabs{border-bottom-color:var(--night-line)}
+.band--dark .tab{color:var(--mist)}
+.band--dark .tab:hover,.band--dark .tab[aria-selected="true"]{color:var(--white)}
+.panel{padding-top:clamp(24px,3vw,36px)}
+.panel__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,3vw,48px);align-items:start}
+.panel__shot{grid-column:1 / span 7;min-width:0}
+.panel__text{grid-column:8 / span 5;min-width:0}
+.cfb{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.cfb li{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.cfb li:last-child{border-bottom:1px solid var(--line)}
+.cfb dt,.cfb .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding-top:3px}
+.cfb .v{font-size:.98rem}
+.cfb .v strong{font-family:var(--f-display);font-stretch:108%;font-size:1.15rem;display:block}
+.lowres{margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.loop{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:center;padding-top:clamp(32px,4vw,48px);border-top:1px solid var(--line)}
+.loop__t{grid-column:1 / span 5;min-width:0}
+.loop__t h3{font-size:clamp(1.4rem,1.1rem + 1vw,2rem)}
+.loop__t p{margin-top:12px;color:var(--ink-soft)}
+.loop__d{grid-column:7 / span 6;min-width:0}
+.loop__d ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative}
+.loop__d li{text-align:center;padding:16px 6px;border:1px solid var(--line);margin-left:-1px;font-family:var(--f-display);font-stretch:110%;font-weight:600;font-size:.98rem;background:var(--white)}
+.loop__d li small{display:block;font-family:var(--f-mono);font-size:10.5px;font-weight:400;color:var(--ink-soft);margin-top:4px;letter-spacing:.04em}
+.loop__d li:last-child{background:var(--night);color:var(--white);border-color:var(--night)}
+.loop__d li:last-child small{color:var(--mist)}
+.loop__back{display:flex;align-items:center;gap:8px;margin-top:10px;font-family:var(--f-mono);font-size:11px;color:var(--orange-ink);justify-content:flex-end}
+.loop__back svg{width:100%;max-width:100%;height:22px;flex:1}
+@media (max-width: 900px){
+  .panel__shot,.panel__text,.loop__t,.loop__d{grid-column:1 / -1}
+  .loop__d ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .loop__d li{margin-top:-1px}
+}
+
+/* 07 — Verticales */
+.vgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,3vw,48px);align-items:start}
+.vgrid__map{grid-column:1 / span 6;min-width:0}
+.vgrid__text{grid-column:7 / span 6;min-width:0}
+.vmap{width:100%;height:auto;display:block}
+.vmap .spoke{stroke:#3a5568;stroke-width:1.2}
+.vmap .node rect{fill:var(--night-deep);stroke:#4b6577;stroke-width:1.2}
+.vmap .node text{font-family:var(--f-mono);font-size:12px;fill:#e3eaef;text-anchor:middle;dominant-baseline:middle}
+.vmap .core circle.ring{fill:none;stroke:var(--orange);stroke-width:1.5}
+.vmap .core text{font-family:var(--f-display);font-weight:700;font-size:15px;fill:var(--white);text-anchor:middle;letter-spacing:.14em}
+.vmap .core text.s{font-family:var(--f-mono);font-weight:400;font-size:9.5px;fill:var(--mist);letter-spacing:.08em}
+.vmap .verb{font-family:var(--f-mono);font-size:10px;fill:var(--orange);text-anchor:middle;letter-spacing:.1em}
+.vmap .node{transition:opacity 300ms}
+.vmap.is-swapping .node{opacity:.15}
+.vtext h3{font-size:clamp(1.3rem,1.1rem + .8vw,1.8rem);margin-top:14px}
+.vtext .lede{margin-top:12px}
+.vfacts{margin:24px 0 0;display:grid;gap:0}
+.vfacts div{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--night-line)}
+.vfacts div:last-child{border-bottom:1px solid var(--night-line)}
+.vfacts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);padding-top:3px}
+.vfacts dd{margin:0;color:#dde5eb;font-size:.98rem}
+.vtext .btn-row{margin-top:24px}
+.vcaveat{margin-top:16px;color:var(--mist)}
+@media (max-width: 900px){
+  .vgrid__map,.vgrid__text{grid-column:1 / -1}
+  .vgrid__map{order:2}
+  .vfacts div{grid-template-columns:1fr;gap:4px}
+}
+
+/* 08 — Confiance */
+.arch{margin-top:clamp(36px,4vw,56px);overflow-x:auto;padding-bottom:6px}
+.arch ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:0;min-width:900px;position:relative}
+.arch li{padding:16px 14px;border:1px solid var(--line);margin-left:-1px;background:var(--white);position:relative}
+.arch li .note{color:var(--ink-soft);display:block;margin-bottom:8px}
+.arch li strong{font-family:var(--f-display);font-stretch:108%;font-size:1rem;display:block;line-height:1.2}
+.arch li span{display:block;font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+.arch li.human-gate{background:var(--night);color:var(--white);border-color:var(--night)}
+.arch li.human-gate .note,.arch li.human-gate span{color:var(--mist)}
+.arch li.human-gate strong{color:var(--white)}
+.arch li.human-gate::before{content:"";position:absolute;inset:-1px;border:2px solid var(--orange);pointer-events:none}
+.arch__back{min-width:900px;display:flex;align-items:center;gap:10px;margin-top:8px;font-family:var(--f-mono);font-size:11px;color:var(--orange-ink)}
+.arch__back i{flex:1;height:14px;border:1.5px solid var(--orange);border-top:0;border-radius:0 0 6px 6px}
+.trust{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(48px,6vw,80px)}
+.trust__facts{grid-column:1 / span 5;min-width:0}
+.trust__qa{grid-column:7 / span 6;min-width:0}
+.trust h3{font-size:1.25rem}
+.facts{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.facts li{padding:12px 12px 12px 0;border-top:1px solid var(--line);font-size:.95rem;display:flex;gap:10px;align-items:flex-start}
+.facts li svg{width:16px;height:16px;color:var(--state-green);flex:none;margin-top:4px}
+.qa{margin-top:16px;border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{cursor:pointer;list-style:none;padding:16px 36px 16px 0;position:relative;font-weight:600;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--f-mono);font-size:1.3rem;color:var(--orange-ink)}
+.qa details[open] summary::after{content:"–"}
+.qa .ans{padding:0 0 18px;color:var(--ink-soft);font-size:.96rem;max-width:60ch}
+@media (max-width: 900px){
+  .trust__facts,.trust__qa{grid-column:1 / -1}
+}
+@media (max-width: 480px){.facts{grid-template-columns:1fr}}
+
+/* 09 — Démo */
+.conv{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,4vw,64px);align-items:start}
+.conv__text{grid-column:1 / span 5;min-width:0}
+.conv__form{grid-column:7 / span 6;min-width:0}
+.conv h2{font-size:clamp(2rem,1.3rem + 2.8vw,3.4rem)}
+.recap{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:0}
+.recap li{padding:14px 0;border-top:1px solid var(--night-line);display:grid;grid-template-columns:44px 1fr;gap:10px;color:#d4dde4;font-size:.98rem}
+.recap li:last-child{border-bottom:1px solid var(--night-line)}
+.recap b{font-family:var(--f-mono);font-weight:400;color:var(--orange);font-size:var(--t-small)}
+.vchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.vchip{font:inherit;font-size:var(--t-small);border:1px solid var(--night-line);background:none;color:#d4dde4;padding:8px 12px;border-radius:3px;cursor:pointer;min-height:40px}
+.vchip[aria-pressed="true"]{border-color:var(--orange);color:var(--white);background:rgba(244,90,10,.12)}
+.form{background:var(--white);color:var(--ink);border-radius:4px;padding:clamp(20px,3vw,36px);color-scheme:light}
+.form h3{font-size:1.3rem}
+.form .sub{color:var(--ink-soft);font-size:var(--t-small);margin-top:6px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field{display:grid;gap:6px;min-width:0}
+.field--full{grid-column:1 / -1}
+.field label{font-size:var(--t-small);font-weight:600}
+.field label .opt{font-weight:400;color:var(--ink-soft)}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--white);border:1px solid #aab3ba;border-radius:3px;padding:11px 12px;width:100%;min-height:46px}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:3px solid var(--orange);outline-offset:0;border-color:var(--ink)}
+.field [aria-invalid="true"]{border-color:var(--state-red);box-shadow:inset 0 0 0 1px var(--state-red)}
+.err{color:var(--state-red);font-size:.82rem;min-height:0}
+.err:empty{display:none}
+.hint{color:var(--state-amber);font-size:.82rem}
+.hint:empty{display:none}
+.consent{grid-column:1 / -1;display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.88rem;color:var(--ink-soft);align-items:start}
+.consent input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--orange-ink)}
+.rgpd{grid-column:1 / -1;font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form .btn{width:100%;margin-top:20px}
+.form__done{display:grid;gap:12px}
+.form__done h3{display:flex;gap:10px;align-items:center}
+.form__done svg{width:26px;height:26px;color:var(--state-green)}
+.form__done .badge{justify-self:start;white-space:normal}
+@media (max-width: 900px){
+  .conv__text,.conv__form{grid-column:1 / -1}
+}
+@media (max-width: 560px){.fields{grid-template-columns:1fr}}
+
+/* Footer */
+.footer{background:var(--night-deep);color:var(--mist);padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:40px calc(40px + env(safe-area-inset-bottom,0px));font-size:var(--t-small)}
+.footer__in{max-width:var(--maxw);margin-inline:auto;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+.footer img{height:22px;width:auto}
+.footer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+.footer a{color:#c6d1da}
+.footer .todo{color:#f0b35a}
+.footer__proto{flex-basis:100%;border-top:1px solid #1c3142;padding-top:16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em}
+
+/* CTA mobile permanent */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px max(16px, env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px, env(safe-area-inset-left,0px));background:rgba(10,22,32,.95);border-top:1px solid rgba(255,255,255,.1);display:none;transform:translateY(110%);transition:transform var(--dur) var(--ease)}
+.sticky-cta .btn{width:100%}
+.sticky-cta.is-on{transform:none}
+@media (max-width: 900px){.sticky-cta{display:block}}
+
+/* Lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1400px, 96vw);width:100%;color:var(--white)}
+dialog.lb::backdrop{background:rgba(6,14,20,.88)}
+.lb__in{display:grid;gap:12px}
+.lb__img{background:var(--white);border-radius:4px;overflow:auto;max-height:80vh}
+.lb__img img{width:100%;min-width:640px}
+.lb__bar{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.lb__cap{font-size:var(--t-small);color:#d4dde4;max-width:70ch}
+.lb__close{font:inherit;background:var(--white);color:var(--night);border:0;border-radius:3px;padding:10px 14px;font-weight:600;cursor:pointer;min-height:44px}
+
+
+/* ===== V2 : immersion ===== */
+.readbar{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:70;background:var(--orange);transform-origin:0 50%;transform:scaleX(var(--read,0));pointer-events:none}
+
+/* Hero photo plein cadre */
+.hero{min-height:min(100svh,1000px);padding-bottom:clamp(72px,9vw,120px);display:flex;flex-direction:column;justify-content:center;background:var(--night)}
+.hero>.wrap{z-index:2;width:100%}
+.hero__media{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% 60%;transform-origin:70% 75%;transform:scale(calc(1.05 + var(--p,0) * .4)) translate3d(0,calc(var(--p,0) * -5%),0);will-change:transform}
+.hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(16,34,48,.97) 0%,rgba(16,34,48,.85) 36%,rgba(16,34,48,.25) 68%,rgba(16,34,48,.05) 100%),linear-gradient(0deg,var(--night) 0%,rgba(16,34,48,0) 26%)}
+.hero__arc{position:absolute;right:-12vw;top:46%;width:min(72vw,980px);aspect-ratio:1;transform:translateY(-50%) rotate(calc(-20deg + var(--p,0) * 50deg));z-index:1;pointer-events:none}
+.hero__arc circle{fill:none}
+.js .hero__arc .draw{stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 2.6s .5s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero__aside{background:rgba(10,22,32,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-left:2px solid var(--orange);padding:22px 24px}
+.hero h1{text-transform:uppercase;font-size:clamp(2.3rem,1.3rem + 4.2vw,4.9rem);line-height:1.02}
+.hero h1 .l{display:block}
+.rule{width:72px;height:3px;background:var(--orange);margin-top:1.5rem}
+.js .hero [data-in]{animation:rise 1s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);text-decoration:none}
+.cue i{display:block;width:1px;height:40px;background:linear-gradient(var(--orange),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:900px){
+  .hero__media::after{background:linear-gradient(0deg,var(--night) 6%,rgba(16,34,48,.86) 50%,rgba(16,34,48,.55) 100%)}
+  .hero__arc{right:-40vw;width:120vw;top:30%}
+  .cue{display:none}
+}
+
+/* Phrase manifeste */
+.statement{background:var(--night);color:var(--white);padding-block:clamp(96px,14vw,200px)}
+.statement__p{font-family:var(--f-display);font-stretch:112%;font-weight:650;font-size:clamp(1.8rem,1.1rem + 3.3vw,4.1rem);line-height:1.1;letter-spacing:-.015em;max-width:21ch}
+.statement__p em{font-style:normal}
+.js .statement .w{color:#2a4254;transition:color .4s var(--ease)}
+.js .statement .w.on{color:var(--white)}
+.statement em,.js .statement .w.k.on{color:var(--orange)}
+.statement__sig{margin-top:clamp(28px,4vw,48px);display:flex;gap:16px;align-items:center;font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
+.statement__sig::before{content:"";width:48px;height:2px;background:var(--orange)}
+
+/* Scène « personnes » */
+.people{background:var(--night-deep);color:var(--white);position:relative}
+.people__intro{padding-top:clamp(72px,8vw,112px);padding-bottom:clamp(28px,3vw,40px)}
+.people__stage{display:grid;gap:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:clamp(64px,8vw,112px);max-width:calc(var(--maxw) + 32px);margin-inline:auto}
+.pslide{position:relative;min-height:480px;overflow:hidden;border-radius:4px;display:flex;align-items:flex-end;isolation:isolate}
+.pslide__media{position:absolute;inset:0;overflow:hidden;z-index:-1}
+.pslide__media img,.pslide__media svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 7s linear}
+.pslide__media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,22,32,.95) 0%,rgba(10,22,32,.6) 45%,rgba(10,22,32,.05) 80%)}
+.pslide__text{padding:28px 24px;max-width:560px}
+.picon{position:relative;width:56px;height:56px;color:var(--white);margin-bottom:18px}
+.picon svg{width:100%;height:100%}
+.pslide h3{font-family:var(--f-display);font-stretch:118%;text-transform:uppercase;letter-spacing:.06em;font-size:1rem;font-weight:700;color:var(--white)}
+.pslide h3 small{display:block;font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.14em;color:var(--orange);margin-bottom:6px}
+.pslide .big{margin-top:12px;font-family:var(--f-display);font-stretch:110%;font-weight:650;font-size:clamp(1.5rem,1.1rem + 1.6vw,2.6rem);line-height:1.08}
+.pslide .big span{display:block}
+.pslide .big span+span{color:#c6d1da}
+.pslide .sub{margin-top:14px;color:#c6d1da;max-width:46ch;font-size:.98rem}
+.pslide .badge{margin-top:14px}
+.people__rail{display:none}
+@media (min-width:901px){
+  .people__stage{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pin .people__track{height:330vh;position:relative}
+  .pin .people__stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--header-h));height:calc(100vh - var(--header-h));display:block;max-width:none;padding:0;overflow:hidden}
+  .pin .pslide{position:absolute;inset:0;border-radius:0;min-height:0;opacity:0;transition:opacity 1s var(--ease);align-items:center}
+  .pin .pslide.is-on{opacity:1}
+  .pin .pslide__media img,.pin .pslide__media svg{transform:scale(1.14)}
+  .pin .pslide.is-on .pslide__media img,.pin .pslide.is-on .pslide__media svg{transform:scale(1)}
+  .pin .pslide__media::after{background:linear-gradient(90deg,rgba(10,22,32,.94) 0%,rgba(10,22,32,.72) 34%,rgba(10,22,32,.08) 70%),linear-gradient(0deg,rgba(10,22,32,.6),transparent 30%)}
+  .pin .pslide__text{padding:0;margin-left:max(24px,calc((100vw - var(--maxw)) / 2));transform:translateY(24px);transition:transform 1s var(--ease)}
+  .pin .pslide.is-on .pslide__text{transform:none}
+  .pin .pslide .big{font-size:clamp(2.2rem,1.2rem + 2.6vw,3.8rem)}
+  .pin .people__rail{display:flex;position:absolute;z-index:3;left:max(24px,calc((100vw - var(--maxw)) / 2));right:max(24px,calc((100vw - var(--maxw)) / 2));bottom:32px;gap:12px}
+  .people__rail span{flex:1;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);display:grid;gap:8px}
+  .people__rail i{display:block;height:2px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
+  .people__rail i::after{content:"";position:absolute;inset:0;background:var(--orange);transform-origin:0 50%;transform:scaleX(var(--f,0))}
+  .people__rail span.is-on{color:var(--white)}
+}
+
+/* Bannière canicule */
+.heat{position:relative;margin-top:clamp(32px,4vw,48px);border-radius:4px;overflow:hidden;min-height:clamp(280px,34vw,440px);display:flex;align-items:flex-end;color:var(--white);isolation:isolate}
+.heat img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;object-position:50% 30%;z-index:-2;transform:translate3d(0,calc((var(--p,.5) - .5) * -12%),0)}
+.heat::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(16,34,48,.94) 0%,rgba(16,34,48,.25) 62%),linear-gradient(90deg,rgba(244,90,10,.45),rgba(244,90,10,0) 65%)}
+.heat__in{padding:clamp(22px,3vw,36px);display:grid;gap:12px}
+.heat__t{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.14em;text-transform:uppercase;color:#ffd2b5}
+.heat p.q{font-family:var(--f-display);font-stretch:110%;font-weight:650;font-size:clamp(1.35rem,1rem + 1.4vw,2.2rem);line-height:1.12;max-width:26ch}
+.temp{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:var(--t-small)}
+.temp i{display:block;width:clamp(120px,24vw,260px);height:4px;background:rgba(255,255,255,.25);position:relative;border-radius:2px}
+.temp i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(25% + var(--p,.6) * 75%);max-width:100%;background:linear-gradient(90deg,#f6b44a,var(--orange),var(--state-red));border-radius:2px}
+
+/* Ville qui s'éteint */
+.city{position:relative;margin-top:clamp(32px,4vw,48px);height:clamp(260px,34vw,440px);border:1px solid var(--night-line);border-radius:4px;overflow:hidden;background:#050c12}
+.city canvas{position:absolute;inset:0;width:100%;height:100%}
+.city__hud{position:absolute;left:16px;right:16px;top:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.city__hud b{color:var(--orange);font-weight:500}
+
+/* Capture qui se redresse */
+.js #interface .frame{transform:perspective(1600px) rotateX(calc((1 - min(1, var(--p,1) * 2.4)) * 20deg)) scale(calc(.9 + min(1, var(--p,1) * 2.4) * .1));transform-origin:50% 0}
+
+/* Démo sur fond de ville */
+.demo{overflow:hidden;isolation:isolate}
+.demo__bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.demo__bg img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;opacity:.42;transform:translate3d(0,calc(var(--p,.5) * -6%),0)}
+.demo__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 20%,rgba(16,34,48,.7) 55%,rgba(16,34,48,.92) 100%)}
+@media (max-width:900px){.demo__bg::after{background:linear-gradient(0deg,var(--night) 40%,rgba(16,34,48,.7) 100%)}}
+
+/* Apparitions au scroll */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--rd,0s)}
+.js .rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.js .rv{opacity:1;transform:none}.js .statement .w{color:var(--white)}.js .statement .w.k{color:var(--orange)}}
+
+/* Grilles : 4 colonnes logiques sur mobile, réduites à une pile */
+.chap{grid-template-columns:minmax(0,1fr)}
+.chap>*{min-width:0}
+@media (max-width: 900px){
+  .hero__grid,.split,.engine,.timeline,.domino-foot,.panel__grid,.loop,.vgrid,.trust,.conv{grid-template-columns:minmax(0,1fr)}
+  .hero__text,.hero__aside,.split__text,.split__visual,.engine__steps,.chapters-c,.domino-foot>p,.domino-foot>div,.panel__shot,.panel__text,.loop__t,.loop__d,.vgrid__map,.vgrid__text,.trust__facts,.trust__qa,.conv__text,.conv__form{grid-column:1 / -1}
+}
+
+/* Mouvement réduit */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:1ms!important;animation-duration:1ms!important}
+}
+</style>
+
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="readbar" aria-hidden="true"></div>
+
+<header class="header">
+  <div class="header__in">
+    <a class="header__logo" href="#top" aria-label="KER, retour en haut de page"><img src="__IMG_logo-word__" alt="KER" width="632" height="158"></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="#fonctionnement" data-nav="fonctionnement">Fonctionnement</a>
+      <a href="#secteurs" data-nav="secteurs">Secteurs</a>
+      <a href="#cas-usage" data-nav="cas-usage">Cas d'usage</a>
+      <a href="#demo" data-nav="demo">Démo</a>
+    </nav>
+    <a class="btn btn--primary header__cta" href="#demo" data-cta="header">Demander une démonstration</a>
+  </div>
+</header>
+
+<nav class="chapters" aria-label="Chapitres du récit">
+  <a href="#top" data-ch="top"><span>00 · Voir plus loin</span><i></i></a>
+  <a href="#propagation" data-ch="propagation"><span>01 · Propagation</span><i></i></a>
+  <a href="#fonctionnement" data-ch="fonctionnement"><span>02 · Le moteur KER</span><i></i></a>
+  <a href="#interface" data-ch="interface"><span>03 · L'interface</span><i></i></a>
+  <a href="#canicule" data-ch="canicule"><span>04 · Cas canicule</span><i></i></a>
+  <a href="#domino" data-ch="domino"><span>05 · Effet domino</span><i></i></a>
+  <a href="#orchestration" data-ch="orchestration"><span>06 · Orchestration</span><i></i></a>
+  <a href="#secteurs" data-ch="secteurs"><span>07 · Secteurs</span><i></i></a>
+  <a href="#confiance" data-ch="confiance"><span>08 · Confiance</span><i></i></a>
+  <a href="#demo" data-ch="demo"><span>09 · Démo</span><i></i></a>
+</nav>
+
+<main id="main">
+
+<!-- 00 — HERO -->
+<section class="band band--dark hero" id="top" data-chapter="top" data-progress aria-labelledby="h-hero">
+  <div class="hero__media" aria-hidden="true"><img src="__IMG_photo-hero__" alt="" width="1920" height="1080" fetchpriority="high"></div>
+  <svg class="hero__arc" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="175" stroke="rgba(255,255,255,.12)" stroke-width="1"/><circle class="draw" cx="200" cy="200" r="175" stroke="#f45a0a" stroke-width="1.6" pathLength="1100" stroke-linecap="round" transform="rotate(200 200 200)" style="stroke-dasharray:330 1100"/></svg>
+  <div class="wrap">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <img class="hero__logo" data-in style="--d:.05s" src="__IMG_logo-lockup__" alt="KER — Krisis Emergency Response" width="632" height="202" fetchpriority="high">
+        <h1 id="h-hero"><span class="l" data-in style="--d:.15s">Voir plus loin.</span><em class="l" data-in style="--d:.35s">Agir au bon moment.</em></h1>
+        <div class="rule" data-in style="--d:.55s"></div>
+        <p class="hero__def" data-in style="--d:.6s">La plateforme de résilience opérationnelle face aux crises.</p>
+        <p class="hero__sub" data-in style="--d:.7s">Une plateforme d'anticipation et de gestion de crise pour assurer la continuité de vos missions critiques.</p>
+        <p class="signature" data-in style="--d:.8s" aria-label="Anticiper. Décider. Coordonner."><span>Anticiper</span><span>Décider</span><span>Coordonner</span></p>
+        <div class="btn-row" data-in style="--d:.9s">
+          <a class="btn btn--primary" href="#demo" data-cta="hero">Demander une démonstration
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a>
+          <a class="btn btn--ghost" href="#fonctionnement" data-cta="hero_secondary">Explorer le fonctionnement</a>
+        </div>
+      </div>
+      <dl class="hero__aside" data-in style="--d:1.05s">
+        <div><dt>Pour qui</dt><dd>Santé, collectivités, industrie : les organisations multi-sites aux missions critiques.</dd></div>
+        <div><dt>Quand</dt><dd>Avant, pendant et après la crise, dans une même chaîne opérationnelle.</dd></div>
+        <div><dt>Pour quoi</dt><dd>Partager une même situation, décider sur des faits, coordonner les équipes, tirer les leçons.</dd></div>
+      </dl>
+    </div>
+  </div>
+  <a class="cue" href="#manifeste" aria-label="Faire défiler"><span>Défiler</span><i></i></a>
+</section>
+
+<!-- MANIFESTE -->
+<section class="statement" id="manifeste" data-progress aria-label="Manifeste">
+  <div class="wrap">
+    <p class="statement__p" data-words>Derrière chaque crise, il y a <em>des personnes</em> à protéger, <em>des services</em> à maintenir et <em>des équipes</em> qui doivent décider vite, ensemble.</p>
+    <p class="statement__sig">Anticiper · Décider · Coordonner</p>
+  </div>
+</section>
+
+<!-- CE QUE KER PROTÈGE -->
+<section class="people" id="personnes" aria-labelledby="h-people">
+  <div class="band people__intro" style="padding-block:0">
+    <div class="wrap" style="padding-top:clamp(72px,8vw,112px);padding-bottom:clamp(28px,3vw,40px)">
+      <p class="eyebrow">Ce que KER protège</p>
+      <h2 id="h-people" style="max-width:22ch">Des personnes, des services, des activités.</h2>
+    </div>
+  </div>
+  <div class="people__track" id="people-track">
+    <div class="people__stage">
+      <article class="pslide is-on" data-slide="0">
+        <div class="pslide__media"><img src="__IMG_photo-sante__" alt="Une soignante marche dans un couloir d'hôpital lumineux." width="1600" height="900" loading="lazy" style="object-position:50% 30%"></div>
+        <div class="pslide__text">
+          <div class="picon" aria-hidden="true"><svg viewBox="0 0 56 56" fill="none"><path d="M40 6a20 20 0 0 1 10 10" stroke="#f45a0a" stroke-width="3" stroke-linecap="round"/><path d="M21 10h12v11h11v12H33v11H21V33H10V21h11z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+          <h3><small>01 · Santé</small>Hôpitaux, EHPAD, soins à domicile</h3>
+          <p class="big"><span>Protéger les personnes.</span><span>Assurer la continuité des soins.</span></p>
+          <p class="sub">Savoir où sont les plus fragiles quand la chaleur monte ou que le courant tombe, et qui peut intervenir.</p>
+          <span class="badge badge--ok">Cas documenté</span>
+        </div>
+      </article>
+      <article class="pslide" data-slide="1">
+        <div class="pslide__media"><img src="__IMG_photo-ville__" alt="Vue aérienne d'une ville française au crépuscule, avec sa rivière et ses ponts." width="1600" height="900" loading="lazy"></div>
+        <div class="pslide__text">
+          <div class="picon" aria-hidden="true"><svg viewBox="0 0 56 56" fill="none"><path d="M40 6a20 20 0 0 1 10 10" stroke="#f45a0a" stroke-width="3" stroke-linecap="round"/><path d="M8 22 28 10l20 12M10 22h36M14 26v16M22 26v16M34 26v16M42 26v16M8 46h40" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3><small>02 · Collectivités et territoires</small>Communes, intercommunalités, opérateurs</h3>
+          <p class="big"><span>Anticiper. Coordonner.</span><span>Maintenir les services essentiels.</span></p>
+          <p class="sub">Écoles, eau, voirie, action sociale : une même situation partagée entre services, élus et prestataires.</p>
+          <span class="badge badge--todo">Déclinaison à valider</span>
+        </div>
+      </article>
+      <article class="pslide" data-slide="2">
+        <div class="pslide__media"><svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="ind-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1823"/><stop offset=".42" stop-color="#2d2632"/><stop offset=".7" stop-color="#b9481a"/><stop offset=".86" stop-color="#f58434"/><stop offset="1" stop-color="#f7a65c"/></linearGradient>
+                <radialGradient id="ind-sun" cx=".7" cy=".8" r=".35"><stop offset="0" stop-color="#ffe0b0" stop-opacity=".95"/><stop offset=".25" stop-color="#ff9b4a" stop-opacity=".55"/><stop offset="1" stop-color="#f45a0a" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect width="1200" height="800" fill="url(#ind-sky)"/><rect width="1200" height="800" fill="url(#ind-sun)"/>
+              <circle cx="840" cy="636" r="44" fill="#ffe6c2" opacity=".92"/>
+              <g fill="#0a1620">
+                <rect x="0" y="660" width="1200" height="140"/>
+                <rect x="190" y="290" width="30" height="372"/><rect x="186" y="284" width="38" height="10"/>
+                <rect x="252" y="360" width="22" height="302"/><rect x="249" y="355" width="28" height="8"/>
+                <path d="M400 662 C 420 570 414 505 392 440 L 520 440 C 498 505 492 570 512 662 Z"/>
+                <rect x="590" y="560" width="130" height="102" rx="4"/><ellipse cx="655" cy="560" rx="65" ry="12"/>
+                <rect x="740" y="575" width="90" height="87" rx="4"/><ellipse cx="785" cy="575" rx="45" ry="9"/>
+                <rect x="880" y="372" width="30" height="290"/><rect x="920" y="430" width="22" height="232"/><rect x="874" y="366" width="42" height="8"/>
+                <rect x="120" y="606" width="960" height="8"/><rect x="120" y="624" width="960" height="5"/>
+                <rect x="540" y="520" width="380" height="7"/>
+                <path d="M1040 662 L1080 330 L1120 662 Z M1050 560 L1110 560 M1060 470 L1100 470" fill="none" stroke="#0a1620" stroke-width="7"/>
+              </g>
+              <g stroke="#0a1620" stroke-width="3">
+                <path d="M540 496 H920 M560 496 V520 M640 496 V520 M720 496 V520 M800 496 V520 M880 496 V520"/>
+                <path d="M880 400 L910 430 M880 460 L910 490 M880 520 L910 550 M910 400 L880 430 M910 460 L880 490 M910 520 L880 550"/>
+              </g>
+              <g>
+                <circle cx="655" cy="473" r="7" fill="#0a1620"/><rect x="649" y="480" width="12" height="40" rx="3" fill="#0a1620"/><rect x="649" y="490" width="12" height="3" fill="#f45a0a"/>
+                <circle cx="690" cy="471" r="7" fill="#0a1620"/><rect x="684" y="478" width="12" height="42" rx="3" fill="#0a1620"/><rect x="684" y="489" width="12" height="3" fill="#f45a0a"/>
+              </g>
+            </svg></div>
+        <div class="pslide__text">
+          <div class="picon" aria-hidden="true"><svg viewBox="0 0 56 56" fill="none"><path d="M40 6a20 20 0 0 1 10 10" stroke="#f45a0a" stroke-width="3" stroke-linecap="round"/><path d="M8 46V26l10 6v-6l10 6v-6l10 6V14h8v32zM8 46h40M16 40h4M26 40h4M36 40h4" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+          <h3><small>03 · Industrie et sites critiques</small>Unités de production, énergie, logistique</h3>
+          <p class="big"><span>Prévenir les risques. Réduire l'impact.</span><span>Revenir rapidement en activité.</span></p>
+          <p class="sub">Maintenance, logistique, équipes de sécurité : voir les dépendances avant qu'elles ne cèdent.</p>
+          <span class="badge badge--todo">Déclinaison à valider</span>
+        </div>
+      </article>
+      <div class="people__rail" aria-hidden="true">
+        <span data-r="0"><i></i>Santé</span><span data-r="1"><i></i>Collectivités</span><span data-r="2"><i></i>Industrie</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 — PROPAGATION -->
+<section class="band band--deep" id="propagation" data-chapter="propagation" data-progress aria-labelledby="h-prop">
+  <div class="wrap split">
+    <div class="split__text">
+      <p class="eyebrow"><b>01</b> Quand un incident se propage</p>
+      <h2 id="h-prop">Quand la crise s'étend, la vision se fragmente.</h2>
+      <p class="lede">Plusieurs sites, des équipes d'astreinte, des prestataires, des systèmes qui dépendent les uns des autres. Au moment de décider, chacun ne voit qu'une partie de la situation.</p>
+      <ul class="pains">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="19" r="2"/><path d="M7 7l3 2M17 7l-3 2M12 12v5" stroke-dasharray="2 2"/></svg><div><strong>Des signaux dispersés</strong><span>Appels, messages et tableurs arrivent à des personnes différentes.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="7" height="6"/><rect x="14" y="14" width="7" height="6"/><path d="M10 7h4v10" stroke-dasharray="2 2"/></svg><div><strong>Des dépendances invisibles</strong><span>Énergie, télécoms, accès : une défaillance en entraîne d'autres.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M9 12h6M9 16h4"/></svg><div><strong>Des décisions difficiles à retracer</strong><span>Qui a décidé quoi, à quelle heure, sur quelle information ?</span></div></li>
+      </ul>
+    </div>
+    <div class="split__visual">
+      <div class="net-state">
+        <span>Vue</span>
+        <button type="button" data-net="whole" aria-pressed="false">Situation partagée</button>
+        <button type="button" data-net="frag" aria-pressed="true">Situation fragmentée</button>
+      </div>
+      <svg class="net" id="net" viewBox="0 0 600 420" role="img" aria-labelledby="net-t net-d">
+        <title id="net-t">Réseau multi-sites fragmenté</title>
+        <desc id="net-d">Six sites reliés à une cellule de crise. Quand l'incident se propage, les liens se rompent et des dépendances apparaissent entre l'énergie, les télécoms et les accès.</desc>
+        <g class="links">
+          <path class="lnk" d="M300 210 L110 90"/><path class="lnk" d="M300 210 L490 90"/><path class="lnk" d="M300 210 L80 230"/>
+          <path class="lnk" d="M300 210 L520 230"/><path class="lnk" d="M300 210 L170 350"/><path class="lnk" d="M300 210 L430 350"/>
+        </g>
+        <g class="deps">
+          <path class="dep" d="M300 30 C 200 40, 140 60, 120 78"/>
+          <path class="dep" d="M300 30 C 400 40, 460 60, 480 78"/>
+          <path class="dep" d="M560 300 C 540 330, 470 345, 448 348"/>
+          <path class="dep" d="M40 300 C 60 330, 130 345, 152 348"/>
+        </g>
+        <g class="sys"><rect x="250" y="14" width="100" height="28" rx="2"/><text x="300" y="32" text-anchor="middle">ÉNERGIE</text></g>
+        <g class="sys"><rect x="510" y="286" width="84" height="28" rx="2"/><text x="552" y="304" text-anchor="middle">TÉLÉCOMS</text></g>
+        <g class="sys"><rect x="6" y="286" width="72" height="28" rx="2"/><text x="42" y="304" text-anchor="middle">ACCÈS</text></g>
+        <g class="site" style="transform:translate(-18px,-14px)"><rect x="60" y="72" width="100" height="34" rx="2"/><text x="110" y="93" text-anchor="middle">Site A</text></g>
+        <g class="site" style="transform:translate(16px,-16px)"><rect x="440" y="72" width="100" height="34" rx="2"/><text x="490" y="93" text-anchor="middle">Site B</text></g>
+        <g class="site" style="transform:translate(-22px,4px)"><rect x="30" y="213" width="100" height="34" rx="2"/><text x="80" y="234" text-anchor="middle">Site C</text></g>
+        <g class="site" style="transform:translate(22px,6px)"><rect x="470" y="213" width="100" height="34" rx="2"/><text x="520" y="234" text-anchor="middle">Équipe terrain</text></g>
+        <g class="site" style="transform:translate(-10px,18px)"><rect x="110" y="333" width="120" height="34" rx="2"/><text x="170" y="354" text-anchor="middle">Prestataire</text></g>
+        <g class="site" style="transform:translate(12px,18px)"><rect x="370" y="333" width="120" height="34" rx="2"/><text x="430" y="354" text-anchor="middle">Astreinte</text></g>
+        <g><circle cx="300" cy="210" r="44" fill="#0a1620" stroke="#5c7486" stroke-width="1.2"/><text x="300" y="206" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#d4dde4">CELLULE</text><text x="300" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#d4dde4">DE CRISE</text></g>
+        <g class="warn"><circle cx="300" cy="166" r="9"/><text x="300" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#0a1620">!</text></g>
+      </svg>
+      <div class="net-legend">
+        <span><i></i>Lien d'information interrompu</span>
+        <span><i class="o"></i>Dépendance entre systèmes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — MOTEUR -->
+<section class="band band--light" id="fonctionnement" data-chapter="fonctionnement" aria-labelledby="h-engine">
+  <div class="wrap">
+    <p class="eyebrow"><b>02</b> Le moteur KER</p>
+    <h2 id="h-engine">Une même chaîne opérationnelle, avant, pendant et après la crise.</h2>
+    <p class="lede">Cinq étapes, un socle commun. KER détecte, consolide et propose. Les responsables décident.</p>
+
+    <div class="engine">
+      <div class="engine__visual" aria-hidden="true">
+        <div class="engine__card">
+          <div class="phases"><span data-ph="avant">Avant</span><span data-ph="pendant">Pendant</span><span data-ph="apres">Après</span></div>
+          <ol class="verbs">
+            <li data-v="1"><small>01</small>Comprendre</li>
+            <li data-v="2"><small>02</small>Anticiper</li>
+            <li data-v="3"><small>03</small>Décider</li>
+            <li data-v="4"><small>04</small>Coordonner</li>
+            <li data-v="5"><small>05</small>Apprendre</li>
+          </ol>
+          <dl class="engine__who" id="engine-who">
+            <div><dt>KER</dt><dd data-who="ker">Décrit sites, effectifs, astreintes et dépendances dans un référentiel commun.</dd></div>
+            <div class="you"><dt>Vous</dt><dd data-who="you">Validez qui fait quoi, et sur quoi chaque site s'appuie.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <ol class="engine__steps">
+        <li class="step" data-step="1" data-phase="avant">
+          <span class="step__n">01</span>
+          <div>
+            <h3>Comprendre l'écosystème<small>Sites, effectifs, astreintes, dépendances</small></h3>
+            <p>Chaque site, ses capacités, ses équipes mobilisables et ce dont il dépend sont décrits dans un même référentiel.</p>
+            <dl class="who">
+              <div><dt>KER</dt><dd>Décrit sites, effectifs, astreintes et dépendances dans un référentiel commun.</dd></div>
+              <div class="you"><dt>Vous</dt><dd>Validez qui fait quoi, et sur quoi chaque site s'appuie.</dd></div>
+            </dl>
+          </div>
+        </li>
+        <li class="step" data-step="2" data-phase="avant">
+          <span class="step__n">02</span>
+          <div>
+            <h3>Anticiper<small>Risques, seuils, signaux</small></h3>
+            <p>Des seuils configurables transforment des signaux faibles en alertes lisibles, site par site.</p>
+            <dl class="who">
+              <div><dt>KER</dt><dd>Croise risques, seuils configurés et signaux pour faire remonter les tensions.</dd></div>
+              <div class="you"><dt>Vous</dt><dd>Fixez les seuils et choisissez les mesures préventives.</dd></div>
+            </dl>
+          </div>
+        </li>
+        <li class="step" data-step="3" data-phase="pendant">
+          <span class="step__n">03</span>
+          <div>
+            <h3>Décider<small>Priorisation, crise, arbitrage</small></h3>
+            <p>La situation multi-sites est consolidée et une synthèse paramétrable aide à la lecture. Le déclenchement de crise reste un acte humain.</p>
+            <dl class="who">
+              <div><dt>KER</dt><dd>Consolide la situation et propose une synthèse paramétrable.</dd></div>
+              <div class="you"><dt>Vous</dt><dd>Priorisez, arbitrez et déclenchez la crise.</dd></div>
+            </dl>
+          </div>
+        </li>
+        <li class="step" data-step="4" data-phase="pendant">
+          <span class="step__n">04</span>
+          <div>
+            <h3>Coordonner<small>Workflows, actions, SITREP, mobilisation</small></h3>
+            <p>Les étapes du workflow s'enchaînent, chaque action est suivie et la situation est partagée dans un format commun.</p>
+            <dl class="who">
+              <div><dt>KER</dt><dd>Séquence le workflow, trace les actions et structure les SITREP.</dd></div>
+              <div class="you"><dt>Vous</dt><dd>Mobilisez les équipes et validez chaque étape.</dd></div>
+            </dl>
+          </div>
+        </li>
+        <li class="step" data-step="5" data-phase="apres">
+          <span class="step__n">05</span>
+          <div>
+            <h3>Apprendre<small>Journalisation, RETEX, ajustements</small></h3>
+            <p>Décisions et actions sont journalisées. Le retour d'expérience alimente la préparation de la crise suivante.</p>
+            <dl class="who">
+              <div><dt>KER</dt><dd>Journalise décisions et actions, structure le RETEX.</dd></div>
+              <div class="you"><dt>Vous</dt><dd>Ajustez plans, seuils et ressources.</dd></div>
+            </dl>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="human">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="7" r="3.5"/><path d="M5 20c.8-4 3.6-6 7-6s6.2 2 7 6"/></svg>
+      <p><strong>Détecter et aider à décider n'est pas décider.</strong> KER signale, consolide et propose une synthèse. Le déclenchement d'une crise et les arbitrages restent des décisions humaines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — INTERFACE -->
+<section class="band band--paper" id="interface" data-chapter="interface" data-progress aria-labelledby="h-ui">
+  <div class="wrap">
+    <p class="eyebrow"><b>03</b> La preuve par l'interface</p>
+    <h2 id="h-ui">Voir l'organisation telle qu'elle fonctionne réellement.</h2>
+    <p class="lede">Le poste de pilotage groupe rassemble sites, professionnels, matériels et événements, et rend la crise active visible sans changer d'écran.</p>
+
+    <div class="shot">
+      <div class="frame">
+        <div class="frame__bar"><i></i><i></i><i></i><span>KER · Pilotage groupe · vision multi-sites</span></div>
+        <div class="zoom" id="zoom">
+          <img src="__IMG_pilotage__" alt="Écran Pilotage groupe de KER : statistiques agrégées (sites liés, professionnels, adhérents, matériels, événements, crises actives), une crise en cours « Canicule Hérault » de niveau élevé, et un module de synthèse de situation par IA avec sélection des sites et des types d'information." width="1000" height="638" loading="lazy">
+          <button class="hotspot" type="button" style="left:3%;top:13%" data-zone="1" aria-label="Zoomer sur les statistiques agrégées">1</button>
+          <button class="hotspot" type="button" style="left:3%;top:34%" data-zone="2" aria-label="Zoomer sur la crise en cours">2</button>
+          <button class="hotspot" type="button" style="left:3%;top:57%" data-zone="3" aria-label="Zoomer sur la synthèse IA paramétrable">3</button>
+        </div>
+      </div>
+      <div class="shot__tools">
+        <div class="chip-row" role="group" aria-label="Zones de l'écran">
+          <button class="chip" type="button" data-zone="0" aria-pressed="true">Vue d'ensemble</button>
+          <button class="chip" type="button" data-zone="1" aria-pressed="false">1 · Vision consolidée</button>
+          <button class="chip" type="button" data-zone="2" aria-pressed="false">2 · Crise visible</button>
+          <button class="chip" type="button" data-zone="3" aria-pressed="false">3 · Synthèse IA</button>
+        </div>
+        <button class="chip" type="button" data-lightbox="pilotage">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8V3h5M17 12v5h-5M3 3l6 6M17 17l-6-6"/></svg>Agrandir l'écran</button>
+      </div>
+    </div>
+
+    <div class="reads">
+      <article class="read" data-read="1">
+        <h3><span>1</span>Vision consolidée</h3>
+        <dl><div><dt>Ce que l'interface montre</dt><dd>Sites liés, professionnels, adhérents, matériels, événements et crises actives dans une même vue.</dd></div>
+        <div><dt>Ce que l'utilisateur peut décider</dt><dd>Où se situe la tension et quelles ressources du groupe sont disponibles.</dd></div></dl>
+      </article>
+      <article class="read" data-read="2">
+        <h3><span>2</span>Crise immédiatement visible</h3>
+        <dl><div><dt>Ce que l'interface montre</dt><dd>La crise active, son niveau et les sites concernés.</dd></div>
+        <div><dt>Ce que l'utilisateur peut décider</dt><dd>Ouvrir le pilotage de la crise et mobiliser les sites impliqués.</dd></div></dl>
+      </article>
+      <article class="read" data-read="3">
+        <h3><span>3</span>Synthèse IA paramétrable</h3>
+        <dl><div><dt>Ce que l'interface montre</dt><dd>Le choix des sites et des types d'information à inclure dans une synthèse opérationnelle.</dd></div>
+        <div><dt>Ce que l'utilisateur peut décider</dt><dd>Quelles informations partager à quel niveau. La synthèse aide à lire, elle ne décide pas.</dd></div></dl>
+      </article>
+    </div>
+    <p class="note source">Capture du produit, données de démonstration. Source : présentation d'étude de cas KER, septembre 2026, p. 7.</p>
+  </div>
+</section>
+
+<!-- Transition cas d'usage -->
+<section class="band band--dark" id="cas-usage" aria-labelledby="h-cases">
+  <div class="wrap">
+    <p class="eyebrow">Cas d'usage</p>
+    <h2 id="h-cases">Deux crises. Deux temporalités. Une même capacité de décision.</h2>
+    <div class="twin">
+      <a href="#canicule" data-cta="case_long">
+        <span class="note">Temps long · Santé</span>
+        <h3>Canicule sur un groupe multi-sites</h3>
+        <p>Une alerte croisée avec la vulnérabilité de chaque site, cinq jours avant le pic.</p>
+        <div class="scale" aria-hidden="true">J−5<i></i>J0 + 2 h</div>
+        <p class="arrow">Voir le cas d'usage →</p>
+      </a>
+      <a href="#domino" data-cta="case_short">
+        <span class="note">Temps court · Territoire</span>
+        <h3>Panne électrique territoriale</h3>
+        <p>Une défaillance qui se propage, de l'énergie jusqu'aux soins.</p>
+        <div class="scale" aria-hidden="true">H0<i></i>quelques heures</div>
+        <p class="arrow">Voir l'effet domino →</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — CANICULE -->
+<section class="band band--light" id="canicule" data-chapter="canicule" data-progress aria-labelledby="h-heat">
+  <div class="wrap">
+    <p class="eyebrow"><b>04</b> Cas santé : canicule</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between">
+      <h2 id="h-heat" style="max-width:20ch">Anticiper une canicule sur plusieurs sites, de J−5 à J0.</h2>
+      <span class="badge badge--demo">Scénario de démonstration</span>
+    </div>
+
+    <div class="heat">
+      <img src="__IMG_photo-sante__" alt="" width="1600" height="900" loading="lazy">
+      <div class="heat__in">
+        <span class="heat__t">J−5 · Vigilance canicule</span>
+        <p class="q">Derrière chaque seuil d'alerte, des résidents fragiles et des équipes à mobiliser.</p>
+        <span class="temp" aria-hidden="true">Tension<i></i>pic de chaleur</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <nav class="rail" aria-label="Étapes du scénario canicule">
+        <ol>
+          <li data-rail="j5"><a href="#j5"><b>J−5</b><span>Alerte et vulnérabilités</span></a></li>
+          <li data-rail="j1"><a href="#j1"><b>J−1</b><span>Besoins et ressources</span></a></li>
+          <li data-rail="j0"><a href="#j0"><b>J0</b><span>Déclenchement</span></a></li>
+          <li data-rail="j02"><a href="#j02"><b>J0 + 2 h</b><span>Suivi des indicateurs</span></a></li>
+        </ol>
+      </nav>
+      <div class="chapters-c">
+        <article class="chap" id="j5" data-chap="j5">
+          <div class="chap__head"><span class="chap__t">J−5</span><h3>L'alerte rencontre la carte des fragilités</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> une alerte canicule croisée avec la vulnérabilité de chaque site, pour repérer où la tension apparaîtra.</p>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : capture cartographie territoriale et seuils, à intégrer">
+            <strong>Capture à intégrer : cartographie et seuils</strong>
+            <span class="note">Étude de cas 2026, p. 9, 11–13 · export HD natif requis</span>
+          </div>
+        </article>
+        <article class="chap" id="j1" data-chap="j1">
+          <div class="chap__head"><span class="chap__t">J−1</span><h3>Confronter besoins et ressources</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> les besoins prévisibles face aux ressources mobilisables, site par site, avant le pic de chaleur.</p>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : capture simulation J−1, à intégrer">
+            <strong>Capture à intégrer : simulation J−1</strong>
+            <span class="note">Étude de cas 2026, p. 13–14 · chiffres à signaler comme illustratifs</span>
+          </div>
+        </article>
+        <article class="chap" id="j0" data-chap="j0">
+          <div class="chap__head"><span class="chap__t">J0</span><h3>Un événement aggravant, une décision</h3></div>
+          <p class="chap__cap"><strong>Ce que l'utilisateur décide :</strong> la cellule déclenche le pilotage de crise. Les sites concernés et le niveau apparaissent aussitôt pour tout le groupe.</p>
+          <button class="shotbtn" type="button" data-lightbox="pilotage" aria-label="Agrandir la capture : crise Canicule active dans le pilotage groupe">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Pilotage groupe · crise active</span></div>
+            <img src="__IMG_pilotage__" alt="" width="1000" height="638" loading="lazy"></div>
+          </button>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : formulaire de déclenchement direct, à intégrer" style="aspect-ratio:21/6">
+            <strong>Capture à intégrer : déclenchement direct (4 informations)</strong>
+            <span class="note">Étude de cas 2026, p. 17</span>
+          </div>
+        </article>
+        <article class="chap" id="j02" data-chap="j02">
+          <div class="chap__head"><span class="chap__t">J0 + 2 h</span><h3>Les indicateurs évoluent, le groupe suit</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> main courante, actions en cours, étapes terminées et SITREP publiés, avec le suivi territorial de chaque site.</p>
+          <button class="shotbtn" type="button" data-lightbox="tableau" aria-label="Agrandir la capture : tableau de bord de la crise">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Pilotage · Canicule · tableau de bord</span></div>
+            <img src="__IMG_tableau__" alt="" width="680" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span><span class="note" style="color:var(--ink-soft)">Export HD à fournir</span></p>
+        </article>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      <span class="badge badge--demo">Démo</span>
+      <p>Les données, noms de sites et indicateurs de ce scénario sont fictifs. Ils illustrent le fonctionnement du produit et ne constituent pas des résultats clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — EFFET DOMINO -->
+<section class="band band--deep" id="domino" data-chapter="domino" data-progress aria-labelledby="h-domino">
+  <div class="wrap">
+    <p class="eyebrow"><b>05</b> Effet domino · panne électrique territoriale</p>
+    <h2 id="h-domino">Une crise ne reste jamais là où elle commence.</h2>
+    <p class="lede">Une coupure de courant n'arrête pas seulement des équipements. Elle atteint les communications, les déplacements, les équipes, puis les personnes les plus fragiles. KER rend chaque étage de la cascade visible, avec ses options de repli.</p>
+
+    <div class="city" aria-hidden="true">
+      <canvas id="city"></canvas>
+      <div class="city__hud"><span>Territoire · vue de nuit</span><span id="city-status"><b>Étage 0 / 5</b> · situation normale</span></div>
+    </div>
+
+    <ol class="domino" id="domino-list">
+      <li class="tier" data-tier="1">
+        <div class="tier__n">Étage 1<i></i></div>
+        <h3>Énergie</h3>
+        <p class="tier__what">Coupure du réseau sur une partie du territoire.</p>
+        <dl><div><dt>Dépendance</dt><dd>Sites, équipements médicaux et chaîne du froid.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Autonomie des groupes électrogènes, sites prioritaires.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="2">
+        <div class="tier__n">Étage 2<i></i></div>
+        <h3>Télécoms</h3>
+        <p class="tier__what">Les relais perdent leur alimentation.</p>
+        <dl><div><dt>Dépendance</dt><dd>Téléassistance, appels et messageries des équipes.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Canaux de secours, consignes diffusées en amont.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="3">
+        <div class="tier__n">Étage 3<i></i></div>
+        <h3>Accès et mobilité</h3>
+        <p class="tier__what">Feux, éclairage, carburant : les déplacements ralentissent.</p>
+        <dl><div><dt>Dépendance</dt><dd>Tournées à domicile et transferts entre sites.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Tournées repriorisées, itinéraires alternatifs.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="4">
+        <div class="tier__n">Étage 4<i></i></div>
+        <h3>Équipes terrain</h3>
+        <p class="tier__what">Les intervenants ne peuvent plus tout couvrir.</p>
+        <dl><div><dt>Dépendance</dt><dd>Effectifs disponibles et astreintes.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Réaffectation des astreintes, renforts entre sites.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="5">
+        <div class="tier__n">Étage 5<i></i></div>
+        <h3>Soins</h3>
+        <p class="tier__what">Les personnes dépendantes d'un équipement deviennent prioritaires.</p>
+        <dl><div><dt>Dépendance</dt><dd>Continuité des soins en EHPAD, SAD, SSIAD et SMR.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Liste des personnes à risque, transferts vers un site alimenté.</dd></div></dl>
+      </li>
+    </ol>
+    <div class="domino-foot">
+      <p class="note">KER rend les cascades visibles et aide à prioriser. Il ne commande pas les réseaux d'énergie, de télécommunication ou de transport. Exemples illustratifs issus du scénario de démonstration.</p>
+      <div><a class="btn btn--ghost" href="#demo" data-cta="domino">Demander une démonstration</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — ORCHESTRATION -->
+<section class="band band--light" id="orchestration" data-chapter="orchestration" aria-labelledby="h-orch">
+  <div class="wrap">
+    <p class="eyebrow"><b>06</b> Orchestration et traçabilité</p>
+    <h2 id="h-orch">Du tableau de bord au retour d'expérience.</h2>
+    <p class="lede">Une chaîne opérationnelle unique pour coordonner, décider, partager et apprendre. Chaque action laisse une trace.</p>
+
+    <div class="tabs" role="tablist" aria-label="Fonctions de pilotage" data-tabs="orch">
+      <button class="tab" role="tab" id="t-tab" aria-controls="p-tab" aria-selected="true" data-key="tableau"><small>01</small>Tableau de bord</button>
+      <button class="tab" role="tab" id="t-wf" aria-controls="p-wf" aria-selected="false" tabindex="-1" data-key="workflow"><small>02</small>Workflow</button>
+      <button class="tab" role="tab" id="t-sit" aria-controls="p-sit" aria-selected="false" tabindex="-1" data-key="sitrep"><small>03</small>SITREP</button>
+      <button class="tab" role="tab" id="t-ret" aria-controls="p-ret" aria-selected="false" tabindex="-1" data-key="retex"><small>04</small>RETEX</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-tab" aria-labelledby="t-tab" tabindex="0">
+      <div class="panel__grid">
+        <div class="panel__shot">
+          <button class="shotbtn" type="button" data-lightbox="tableau" aria-label="Agrandir la capture du tableau de bord">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Tableau de bord</span></div><img src="__IMG_tableau__" alt="Tableau de bord d'une crise : main courante, actions en cours, étapes terminées, SITREP et suivi territorial par site." width="680" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span></p>
+        </div>
+        <div class="panel__text">
+          <ul class="cfb">
+            <li><span class="k">Capture</span><span class="v">Indicateurs clés et état de chaque site impliqué.</span></li>
+            <li><span class="k">Fonction</span><span class="v"><strong>Consolider la situation</strong>Vision multi-sites, état d'avancement et indicateurs clés de la crise.</span></li>
+            <li><span class="k">Bénéfice</span><span class="v">Une seule lecture de la situation pour toute la cellule.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-wf" aria-labelledby="t-wf" tabindex="0" hidden>
+      <div class="panel__grid">
+        <div class="panel__shot">
+          <button class="shotbtn" type="button" data-lightbox="workflow" aria-label="Agrandir la capture du workflow">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Workflow</span></div><img src="__IMG_workflow__" alt="Workflow de crise : étapes séquencées de signalement, pré-qualification, supervision, activation de la cellule, mobilisation et pilotage, chacune avec son statut." width="697" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span></p>
+        </div>
+        <div class="panel__text">
+          <ul class="cfb">
+            <li><span class="k">Capture</span><span class="v">Étapes séquencées, du signalement au pilotage, avec leur statut.</span></li>
+            <li><span class="k">Fonction</span><span class="v"><strong>Orchestrer la réponse</strong>Étapes séquencées, validation, activation de la cellule et conduite opérationnelle.</span></li>
+            <li><span class="k">Bénéfice</span><span class="v">Chacun sait quelle étape est en cours et qui doit valider la suivante.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-sit" aria-labelledby="t-sit" tabindex="0" hidden>
+      <div class="panel__grid">
+        <div class="panel__shot">
+          <button class="shotbtn" type="button" data-lightbox="sitrep" aria-label="Agrandir la capture des rapports de situation">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>SITREP</span></div><img src="__IMG_sitrep__" alt="Rapports de situation (SITREP) structurés : ce qui est établi, ce qui a été fait, ce qui va arriver, ce qui doit être décidé." width="697" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span></p>
+        </div>
+        <div class="panel__text">
+          <ul class="cfb">
+            <li><span class="k">Capture</span><span class="v">SITREP horodatés : établi, réalisé, à venir, à arbitrer.</span></li>
+            <li><span class="k">Fonction</span><span class="v"><strong>Partager la situation</strong>Faits vérifiés, actions réalisées, arbitrages et prochaines étapes dans un format commun.</span></li>
+            <li><span class="k">Bénéfice</span><span class="v">Les décideurs reçoivent la même information, au même format.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-ret" aria-labelledby="t-ret" tabindex="0" hidden>
+      <div class="panel__grid">
+        <div class="panel__shot">
+          <button class="shotbtn" type="button" data-lightbox="retex" aria-label="Agrandir la capture du RETEX">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>RETEX</span></div><img src="__IMG_retex__" alt="Fiche RETEX : points positifs, points négatifs et recommandations." width="697" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span></p>
+        </div>
+        <div class="panel__text">
+          <ul class="cfb">
+            <li><span class="k">Capture</span><span class="v">Points positifs, points négatifs, recommandations.</span></li>
+            <li><span class="k">Fonction</span><span class="v"><strong>Capitaliser sur l'expérience</strong>Points positifs, difficultés et recommandations réinjectés dans la préparation future.</span></li>
+            <li><span class="k">Bénéfice</span><span class="v">La crise suivante commence avec les leçons de la précédente.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="note source">Captures du produit, données de démonstration. Source : présentation d'étude de cas KER, septembre 2026, p. 19.</p>
+
+    <div class="loop">
+      <div class="loop__t">
+        <h3>Chaque crise doit améliorer la préparation de la suivante.</h3>
+        <p>Le RETEX ne finit pas dans un rapport. Il ajuste les seuils, les plans et les ressources du référentiel.</p>
+      </div>
+      <div class="loop__d">
+        <ol aria-label="Boucle opérationnelle de résilience">
+          <li>Voir<small>tableau de bord</small></li>
+          <li>Orchestrer<small>workflow</small></li>
+          <li>Partager<small>SITREP</small></li>
+          <li>Apprendre<small>RETEX</small></li>
+        </ol>
+        <div class="loop__back" aria-hidden="true">
+          <svg viewBox="0 0 400 22" preserveAspectRatio="none"><path d="M392 0 V12 Q392 18 386 18 H14 Q8 18 8 12 V4" fill="none" stroke="#f45a0a" stroke-width="1.5"/><path d="M3 8 L8 1 L13 8" fill="none" stroke="#f45a0a" stroke-width="1.5"/></svg>
+        </div>
+        <p class="note" style="text-align:right;color:var(--orange-ink);margin-top:4px">retour vers la préparation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 — VERTICALES -->
+<section class="band band--dark" id="secteurs" data-chapter="secteurs" aria-labelledby="h-vert">
+  <div class="wrap">
+    <p class="eyebrow"><b>07</b> Secteurs</p>
+    <h2 id="h-vert">Un même moteur de coordination. Des réalités métier différentes.</h2>
+    <p class="lede">D'un secteur à l'autre, les risques, les ressources, les procédures et les acteurs changent. La logique d'anticipation, de décision, de coordination et de RETEX reste la même.</p>
+
+    <div class="tabs" role="tablist" aria-label="Secteurs" data-tabs="vert">
+      <button class="tab" role="tab" id="vt-sante" aria-controls="vpanel" aria-selected="true" data-key="sante">Santé</button>
+      <button class="tab" role="tab" id="vt-coll" aria-controls="vpanel" aria-selected="false" tabindex="-1" data-key="collectivites">Collectivités</button>
+      <button class="tab" role="tab" id="vt-ind" aria-controls="vpanel" aria-selected="false" tabindex="-1" data-key="industrie">Industrie</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="vpanel" aria-labelledby="vt-sante" tabindex="0">
+      <div class="vgrid">
+        <div class="vgrid__map">
+          <svg class="vmap" id="vmap" viewBox="0 0 520 440" role="img" aria-labelledby="vmap-t">
+            <title id="vmap-t">Le moteur KER au centre, relié aux acteurs du secteur sélectionné</title>
+            <g id="vmap-spokes"></g>
+            <g class="core">
+              <circle cx="260" cy="220" r="70" fill="#0a1620" stroke="#3a5568" stroke-width="1.2"/>
+              <circle class="ring" cx="260" cy="220" r="82" stroke-dasharray="4 6"/>
+              <text x="260" y="216">KER</text>
+              <text class="s" x="260" y="236">MOTEUR COMMUN</text>
+            </g>
+            <text class="verb" x="260" y="124">ANTICIPER</text>
+            <text class="verb" x="196" y="322">DÉCIDER</text>
+            <text class="verb" x="330" y="322">COORDONNER</text>
+            <g id="vmap-nodes"></g>
+          </svg>
+        </div>
+        <div class="vgrid__text vtext" id="vtext" aria-live="polite">
+          <!-- rempli par le script ; contenu par défaut = Santé -->
+          <span class="badge badge--ok">Cas documenté · étude de cas 2026</span>
+          <h3>Santé : CHU, cliniques, CPTS, médico-social</h3>
+          <p class="lede">Vision multi-sites, anticipation des tensions, réponse collective, RETEX.</p>
+          <dl class="vfacts">
+            <div><dt>Problème</dt><dd>Multiplicité des sites et des intervenants ; coordination et traçabilité fragmentées.</dd></div>
+            <div><dt>Scénarios</dt><dd>Canicule ; panne électrique touchant EHPAD, SAD, SSIAD et SMR ; coordination multi-sites.</dd></div>
+            <div><dt>Ressources</dt><dd>Professionnels, astreintes, matériels, espaces rafraîchis, places de repli.</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--primary" href="#demo" data-cta="vertical">Demander une démo · Santé</a></div>
+          <p class="note vcaveat">Scénarios et captures documentés dans l'étude de cas 2026. Simulation, pas résultat terrain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 — CONFIANCE -->
+<section class="band band--light" id="confiance" data-chapter="confiance" aria-labelledby="h-trust">
+  <div class="wrap">
+    <p class="eyebrow"><b>08</b> Technologie et confiance</p>
+    <h2 id="h-trust">De la technologie à la décision.</h2>
+    <p class="lede">Architecture fonctionnelle simplifiée. La décision humaine est un point de passage explicite, pas une option.</p>
+
+    <div class="arch" role="region" aria-label="Architecture fonctionnelle, défilable horizontalement" tabindex="0">
+      <ol>
+        <li><span class="note">Référentiel</span><strong>Écosystème</strong><span>Sites, effectifs, astreintes, matériels, dépendances</span></li>
+        <li><span class="note">Consolider</span><strong>Vision multi-sites</strong><span>Statistiques agrégées, crises actives</span></li>
+        <li><span class="note">Détecter</span><strong>Seuils configurables</strong><span>Risques, signaux, alertes par site</span></li>
+        <li><span class="note">Éclairer</span><strong>Synthèse IA paramétrable</strong><span>Sites et informations choisis par l'utilisateur</span></li>
+        <li class="human-gate"><span class="note">Décision humaine</span><strong>Déclenchement direct</strong><span>Les responsables déclenchent et arbitrent</span></li>
+        <li><span class="note">Agir</span><strong>Workflows et SITREP</strong><span>Étapes, actions, mobilisation, rapports</span></li>
+        <li><span class="note">Apprendre</span><strong>Journal et RETEX</strong><span>Traçabilité, recommandations</span></li>
+      </ol>
+      <div class="arch__back" aria-hidden="true"><span>RETEX</span><i></i><span>référentiel</span></div>
+    </div>
+
+    <div class="trust">
+      <div class="trust__facts">
+        <h3>Fonctions documentées</h3>
+        <ul class="facts">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Consolidation multi-sites</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Seuils configurables</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Synthèse IA paramétrable</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Déclenchement direct</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Workflows</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Rapports SITREP</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Journalisation</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>RETEX</li>
+        </ul>
+        <p class="note source">Fonctions présentées dans l'étude de cas KER de septembre 2026. Disponibilité commerciale de chaque fonction à confirmer.</p>
+      </div>
+      <div class="trust__qa">
+        <h3>Les questions des directions et des DSI</h3>
+        <div class="qa">
+          <details open>
+            <summary>Qui décide : l'outil ou l'équipe ?</summary>
+            <p class="ans">L'équipe. KER détecte, consolide et propose une synthèse. Le déclenchement d'une crise et les arbitrages sont des actes des responsables habilités, tracés dans le journal.</p>
+          </details>
+          <details>
+            <summary>Où sont hébergées les données ? <span class="badge badge--todo">À valider</span></summary>
+            <p class="ans">Réponse publiée après validation écrite du responsable technique : hébergement, stockage, chiffrement.</p>
+          </details>
+          <details>
+            <summary>Comment les accès sont-ils gouvernés ? <span class="badge badge--todo">À valider</span></summary>
+            <p class="ans">Réponse publiée après validation écrite du responsable technique : rôles, périmètres par site, journalisation des accès.</p>
+          </details>
+          <details>
+            <summary>KER s'intègre-t-il à nos outils ? <span class="badge badge--todo">À valider</span></summary>
+            <p class="ans">Aucune intégration nommée n'est publiée tant qu'elle n'est pas documentée et validée.</p>
+          </details>
+          <details>
+            <summary>Comment se passe le déploiement ? <span class="badge badge--todo">À valider</span></summary>
+            <p class="ans">Accompagnement, reprise du référentiel et disponibilité de service : à préciser par l'équipe KER.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 — DÉMO -->
+<section class="band band--dark demo" id="demo" data-chapter="demo" data-progress aria-labelledby="h-demo">
+  <div class="demo__bg" aria-hidden="true"><img src="__IMG_photo-ville__" alt="" width="1600" height="900" loading="lazy"></div>
+  <div class="wrap conv">
+    <div class="conv__text">
+      <p class="eyebrow"><b>09</b> Démonstration</p>
+      <h2 id="h-demo">Voyons comment KER s'adapte à votre organisation.</h2>
+      <ul class="recap">
+        <li><b>02</b>Le parcours en cinq étapes, de la préparation au RETEX.</li>
+        <li><b>03</b>Le poste de pilotage multi-sites sur vos propres cas.</li>
+        <li><b>04–06</b>Le scénario canicule, l'effet domino, les workflows et SITREP.</li>
+      </ul>
+      <p class="note" style="margin-top:24px;color:var(--mist)">Votre secteur</p>
+      <div class="vchips" role="group" aria-label="Choisir votre secteur">
+        <button class="vchip" type="button" data-sector="Santé" aria-pressed="false">Santé</button>
+        <button class="vchip" type="button" data-sector="Collectivités" aria-pressed="false">Collectivités</button>
+        <button class="vchip" type="button" data-sector="Industrie" aria-pressed="false">Industrie</button>
+      </div>
+    </div>
+    <div class="conv__form">
+      <form class="form" id="demo-form" novalidate>
+        <div id="form-body">
+          <h3>Demander une démonstration</h3>
+          <p class="sub">Tous les champs sont obligatoires, sauf mention contraire.</p>
+          <div class="fields">
+            <div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" name="prenom" autocomplete="given-name" required aria-describedby="e-prenom"><span class="err" id="e-prenom"></span></div>
+            <div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" autocomplete="family-name" required aria-describedby="e-nom"><span class="err" id="e-nom"></span></div>
+            <div class="field"><label for="f-fonction">Fonction</label><input id="f-fonction" name="fonction" autocomplete="organization-title" required aria-describedby="e-fonction"><span class="err" id="e-fonction"></span></div>
+            <div class="field"><label for="f-org">Organisation</label><input id="f-org" name="organisation" autocomplete="organization" required aria-describedby="e-org"><span class="err" id="e-org"></span></div>
+            <div class="field field--full"><label for="f-email">Email professionnel</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email h-email"><span class="err" id="e-email"></span><span class="hint" id="h-email" aria-live="polite"></span></div>
+            <div class="field field--full"><label for="f-secteur">Secteur</label>
+              <select id="f-secteur" name="secteur" required aria-describedby="e-secteur">
+                <option value="">Choisir…</option><option>Santé</option><option>Collectivités</option><option>Industrie</option><option>Autre</option>
+              </select><span class="err" id="e-secteur"></span></div>
+            <div class="field field--full"><label for="f-msg">Message <span class="opt">(facultatif)</span></label><textarea id="f-msg" name="message" maxlength="1500"></textarea></div>
+            <div class="hp" aria-hidden="true"><label for="f-site">Ne pas remplir</label><input id="f-site" name="site_web" tabindex="-1" autocomplete="off"></div>
+            <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" name="consent" required aria-describedby="e-consent"><span>J'accepte que KER utilise ces informations pour répondre à ma demande de démonstration.<span class="err" id="e-consent" style="display:block"></span></span></label>
+            <p class="rgpd">Vos données servent uniquement à traiter cette demande. Responsable de traitement, durée de conservation, hébergement et destinataires : <span style="color:var(--state-amber)">[à compléter]</span>. Vous pouvez exercer vos droits d'accès, de rectification et d'effacement : voir la politique de confidentialité.</p>
+          </div>
+          <button class="btn btn--primary" type="submit">Demander une démonstration</button>
+        </div>
+        <div class="form__done" id="form-done" hidden tabindex="-1">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3L17 9"/></svg>Merci, votre demande est complète.</h3>
+          <p id="done-text">L'équipe KER reviendra vers vous pour convenir d'un créneau.</p>
+          <span class="badge badge--todo">Prototype : aucune donnée n'a été transmise</span>
+          <p class="note" style="color:var(--ink-soft)">En production, la demande sera routée vers le CRM ou la boîte commerciale retenue, avec email de confirmation.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__in">
+    <img src="__IMG_logo-word__" alt="KER" width="632" height="158">
+    <ul>
+      <li><a href="#fonctionnement">Fonctionnement</a></li>
+      <li><a href="#secteurs">Secteurs</a></li>
+      <li><a href="#cas-usage">Cas d'usage</a></li>
+      <li><a href="#demo">Démo</a></li>
+    </ul>
+    <ul>
+      <li class="todo">Mentions légales (à fournir)</li>
+      <li class="todo">Politique de confidentialité (à fournir)</li>
+      <li class="todo">Cookies (à fournir)</li>
+    </ul>
+    <p class="footer__proto">KER · Krisis Emergency Response · Prototype de validation v0.1, 30 octobre 2026. Captures : données de démonstration. Logo et couleurs provisoires, issus de la planche validée, en attente des fichiers vectoriels.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta"><a class="btn btn--primary" href="#demo" data-cta="sticky_mobile">Demander une démonstration</a></div>
+
+<dialog class="lb" id="lb" aria-label="Capture agrandie">
+  <div class="lb__in">
+    <div class="lb__bar"><p class="lb__cap" id="lb-cap"></p><button class="lb__close" type="button" id="lb-close">Fermer</button></div>
+    <div class="lb__img"><img id="lb-img" src="" alt=""></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  document.documentElement.classList.add("js");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Mesure : convention d'événements (aucun traceur chargé) ---------- */
+  window.dataLayer = window.dataLayer || [];
+  function track(event, data){
+    var o = {event: event}; if (data) for (var k in data) o[k] = data[k];
+    window.dataLayer.push(o);
+  }
+  document.addEventListener("click", function(e){
+    var a = e.target.closest("[data-cta]"); if (!a) return;
+    var where = a.getAttribute("data-cta");
+    track(where === "hero" ? "hero_cta_click" : "cta_click", {cta_location: where, href: a.getAttribute("href")});
+  });
+
+  /* ---------- Menu mobile ---------- */
+  var menuBtn = document.querySelector(".menu-btn"), nav = document.getElementById("nav");
+  menuBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("is-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.addEventListener("click", function(e){
+    if (e.target.closest("a")) { nav.classList.remove("is-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  });
+
+  /* ---------- Chapitre actif ---------- */
+  var chapterLinks = document.querySelectorAll(".chapters a");
+  var navMap = {fonctionnement:"fonctionnement", interface:"fonctionnement", canicule:"cas-usage", domino:"cas-usage", orchestration:"cas-usage", secteurs:"secteurs", confiance:"secteurs", demo:"demo"};
+  var seen = {};
+  var stickyCta = document.getElementById("sticky-cta");
+  function setChapter(id){
+    chapterLinks.forEach(function(a){ a.setAttribute("aria-current", a.dataset.ch === id ? "true" : "false"); });
+    document.querySelectorAll(".nav a").forEach(function(a){ a.setAttribute("aria-current", navMap[id] === a.dataset.nav ? "true" : "false"); });
+    stickyCta.classList.toggle("is-on", id !== "top" && id !== "demo");
+    if (!seen[id]) { seen[id] = true; track("chapter_view", {chapter: id}); }
+  }
+  if ("IntersectionObserver" in window) {
+    var chIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) setChapter(en.target.dataset.chapter); });
+    }, {rootMargin: "-45% 0px -50% 0px"});
+    document.querySelectorAll("[data-chapter]").forEach(function(s){ chIO.observe(s); });
+  }
+
+  /* ---------- Progression au scroll (sections data-progress) ---------- */
+  var progSections = Array.prototype.slice.call(document.querySelectorAll("[data-progress]"));
+  var ticking = false;
+  function progressOf(el){
+    var r = el.getBoundingClientRect(), vh = window.innerHeight;
+    return Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+  }
+  var net = document.getElementById("net");
+  var netMode = "auto";
+  var tiers = document.querySelectorAll(".tier");
+  function onScroll(){
+    ticking = false;
+    progSections.forEach(function(s){
+      var p = progressOf(s);
+      s.style.setProperty("--p", p.toFixed(3));
+      if (s.id === "propagation" && netMode === "auto") setNet(p < 0.42 ? "whole" : "frag");
+      if (s.id === "domino") {
+        var cr = document.querySelector(".city").getBoundingClientRect(), vh = window.innerHeight;
+        var n = reduce ? 5 : Math.max(0, Math.min(5, Math.floor((vh * .78 - cr.top) / (vh * .95) * 6)));
+        tiers.forEach(function(t, i){ t.classList.toggle("is-hit", i < n); });
+        if (window.__city) window.__city.set(n);
+      }
+    });
+  }
+  function setNet(mode){
+    net.classList.toggle("is-whole", mode === "whole");
+    document.querySelectorAll("[data-net]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.net === mode ? "true" : "false"); });
+  }
+  document.querySelectorAll("[data-net]").forEach(function(b){
+    b.addEventListener("click", function(){ netMode = "manual"; setNet(b.dataset.net); });
+  });
+  if (!reduce) {
+    window.addEventListener("scroll", function(){ if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, {passive: true});
+    window.addEventListener("resize", onScroll);
+    onScroll();
+  } else {
+    tiers.forEach(function(t){ t.classList.add("is-hit"); });
+  }
+
+  /* ---------- Hero : horizon de données ---------- */
+  (function(){
+    var cv = document.getElementById("horizon"); if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext("2d"), hero = document.getElementById("top");
+    var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = performance.now(), visible = true, raf = 0;
+    var parts = [];
+    for (var i = 0; i < 46; i++) parts.push({lane: Math.random() * 2 - 1, z: Math.random(), v: .05 + Math.random() * .08, o: Math.random() < .28});
+    var nodes = [[.18,.62],[.36,.46],[.64,.46],[.82,.62],[.5,.38]];
+    function size(){
+      var r = cv.getBoundingClientRect(); W = r.width; H = r.height;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function draw(now){
+      var t = (now - t0) / 1000, p = parseFloat(getComputedStyle(hero).getPropertyValue("--p")) || 0;
+      var hy = H * .3, vx = W / 2;
+      ctx.clearRect(0, 0, W, H);
+      // lueur d'horizon
+      var g = ctx.createLinearGradient(0, hy - 60, 0, hy + 40);
+      g.addColorStop(0, "rgba(244,90,10,0)"); g.addColorStop(.6, "rgba(244,90,10," + (.10 + p * .25).toFixed(3) + ")"); g.addColorStop(1, "rgba(244,90,10,0)");
+      ctx.fillStyle = g; ctx.fillRect(0, hy - 60, W, 100);
+      ctx.strokeStyle = "rgba(244,90,10," + (.5 + p * .5).toFixed(3) + ")"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, hy); ctx.lineTo(W, hy); ctx.stroke();
+      // lignes de fuite
+      ctx.strokeStyle = "rgba(180,205,225,.10)";
+      for (var k = -14; k <= 14; k++) { ctx.beginPath(); ctx.moveTo(vx, hy); ctx.lineTo(vx + k * W * .09, H); ctx.stroke(); }
+      // lignes horizontales qui défilent vers l'horizon
+      var off = reduce ? 0 : (t * .12) % 1;
+      for (var j = 0; j < 12; j++) {
+        var z = (j + 1 - off) / 12, y = hy + (H - hy) * Math.pow(z, 2.2);
+        ctx.strokeStyle = "rgba(180,205,225," + (.03 + z * .09).toFixed(3) + ")";
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+      // flux de données qui remontent vers l'horizon
+      parts.forEach(function(q){
+        var z = reduce ? q.z : (q.z + t * q.v) % 1, d = 1 - z;
+        var y = hy + (H - hy) * Math.pow(d, 2.2), x = vx + q.lane * W * .62 * Math.pow(d, 2.2);
+        ctx.fillStyle = q.o ? "rgba(244,90,10," + (.25 + d * .7).toFixed(3) + ")" : "rgba(220,232,240," + (.12 + d * .4).toFixed(3) + ")";
+        ctx.fillRect(x, y, 1.5 + d * 2, 1.5 + d * 2);
+      });
+      // nœuds (sites, ressources, équipes) reliés
+      var a = Math.min(1, .35 + p * 1.6);
+      ctx.strokeStyle = "rgba(244,90,10," + (a * .35).toFixed(3) + ")"; ctx.setLineDash([3,5]);
+      ctx.beginPath(); nodes.forEach(function(n, i){ var x = n[0]*W, y = n[1]*H; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }); ctx.stroke(); ctx.setLineDash([]);
+      nodes.forEach(function(n){
+        var x = n[0]*W, y = n[1]*H;
+        ctx.fillStyle = "rgba(244,90,10," + a.toFixed(3) + ")"; ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 6.283); ctx.fill();
+        ctx.strokeStyle = "rgba(244,90,10," + (a * .3).toFixed(3) + ")"; ctx.beginPath(); ctx.arc(x, y, 9, 0, 6.283); ctx.stroke();
+      });
+      if (!reduce && visible) raf = requestAnimationFrame(draw);
+    }
+    size(); draw(performance.now());
+    window.addEventListener("resize", function(){ size(); if (reduce || !visible) draw(performance.now()); });
+    if (!reduce && "IntersectionObserver" in window) {
+      new IntersectionObserver(function(en){
+        visible = en[0].isIntersecting; cancelAnimationFrame(raf); if (visible) raf = requestAnimationFrame(draw);
+      }).observe(cv);
+    } else if (reduce) {
+      window.addEventListener("scroll", function(){ requestAnimationFrame(draw); }, {passive: true});
+    }
+  })();
+
+  /* ---------- 02 : étapes du moteur ---------- */
+  var steps = document.querySelectorAll(".step");
+  var verbs = document.querySelectorAll(".verbs li");
+  var phases = document.querySelectorAll(".phases span");
+  var whoKer = document.querySelector("[data-who=ker]"), whoYou = document.querySelector("[data-who=you]");
+  function setStep(n){
+    steps.forEach(function(s){ s.classList.toggle("is-on", s.dataset.step === n); });
+    verbs.forEach(function(v){ v.classList.toggle("is-on", v.dataset.v === n); });
+    var s = document.querySelector('.step[data-step="' + n + '"]');
+    phases.forEach(function(ph){ ph.classList.toggle("is-on", ph.dataset.ph === s.dataset.phase); });
+    var dd = s.querySelectorAll(".who dd"); whoKer.textContent = dd[0].textContent; whoYou.textContent = dd[1].textContent;
+  }
+  setStep("1");
+  if ("IntersectionObserver" in window) {
+    var stIO = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting) setStep(e.target.dataset.step); }); }, {rootMargin: "-40% 0px -55% 0px"});
+    steps.forEach(function(s){ stIO.observe(s); });
+  }
+
+  /* ---------- 03 : zooms sur la capture ---------- */
+  var zoom = document.getElementById("zoom");
+  var zones = {"0":[50,50,1], "1":[50,17,1.9], "2":[50,37,1.9], "3":[50,66,1.7]};
+  function setZone(z){
+    var c = zones[z]; zoom.style.setProperty("--ox", c[0] + "%"); zoom.style.setProperty("--oy", c[1] + "%"); zoom.style.setProperty("--z", c[2]);
+    zoom.classList.toggle("zoomed", z !== "0");
+    document.querySelectorAll(".shot__tools [data-zone]").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.zone === z ? "true" : "false"); });
+    document.querySelectorAll(".read").forEach(function(r){ r.classList.toggle("is-on", r.dataset.read === z); });
+  }
+  document.querySelectorAll("[data-zone]").forEach(function(b){ b.addEventListener("click", function(){ setZone(b.dataset.zone); }); });
+
+  /* ---------- 04 : timeline canicule ---------- */
+  var railItems = document.querySelectorAll("[data-rail]");
+  if ("IntersectionObserver" in window) {
+    var chIO2 = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting) railItems.forEach(function(r){ r.classList.toggle("is-on", r.dataset.rail === e.target.dataset.chap); }); }); }, {rootMargin: "-40% 0px -55% 0px"});
+    document.querySelectorAll("[data-chap]").forEach(function(c){ chIO2.observe(c); });
+  }
+
+  /* ---------- Onglets accessibles (motif ARIA tabs) ---------- */
+  function tabs(list, onChange){
+    var t = Array.prototype.slice.call(list.querySelectorAll("[role=tab]"));
+    function select(tab, focus){
+      t.forEach(function(x){
+        var on = x === tab; x.setAttribute("aria-selected", on ? "true" : "false"); x.tabIndex = on ? 0 : -1;
+      });
+      if (focus) tab.focus();
+      onChange(tab);
+    }
+    t.forEach(function(tab, i){
+      tab.addEventListener("click", function(){ select(tab, false); });
+      tab.addEventListener("keydown", function(e){
+        var k = e.key, n = null;
+        if (k === "ArrowRight") n = t[(i + 1) % t.length]; else if (k === "ArrowLeft") n = t[(i - 1 + t.length) % t.length];
+        else if (k === "Home") n = t[0]; else if (k === "End") n = t[t.length - 1];
+        if (n) { e.preventDefault(); select(n, true); }
+      });
+    });
+    return select;
+  }
+  tabs(document.querySelector('[data-tabs="orch"]'), function(tab){
+    document.querySelectorAll("#orchestration [role=tabpanel]").forEach(function(p){ p.hidden = p.id !== tab.getAttribute("aria-controls"); });
+  });
+
+  /* ---------- 07 : verticales ---------- */
+  var V = {
+    sante: {
+      label: "Santé", badge: ["ok", "Cas documenté · étude de cas 2026"],
+      title: "Santé : CHU, cliniques, CPTS, médico-social",
+      msg: "Vision multi-sites, anticipation des tensions, réponse collective, RETEX.",
+      pb: "Multiplicité des sites et des intervenants ; coordination et traçabilité fragmentées.",
+      sc: "Canicule ; panne électrique touchant EHPAD, SAD, SSIAD et SMR ; coordination multi-sites.",
+      rs: "Professionnels, astreintes, matériels, espaces rafraîchis, places de repli.",
+      caveat: "Scénarios et captures documentés dans l'étude de cas 2026. Simulation, pas résultat terrain.",
+      nodes: ["EHPAD", "SSIAD", "SAD", "SMR", "Astreintes IDE", "Téléassistance"]
+    },
+    collectivites: {
+      label: "Collectivités", badge: ["todo", "Déclinaison proposée · à valider"],
+      title: "Collectivités et opérateurs territoriaux",
+      msg: "Une même situation partagée, des arbitrages coordonnés, un suivi des actions.",
+      pb: "Services interdépendants, agents et prestataires dispersés, continuité des services publics.",
+      sc: "Épisode climatique ; interruption d'un service essentiel ; coordination de plusieurs services et prestataires.",
+      rs: "Agents, services techniques, équipements publics, prestataires sous contrat.",
+      caveat: "Piste de déclinaison : risques, termes, utilisateurs cibles et modules disponibles à valider avec des référents métier.",
+      nodes: ["Services techniques", "Écoles", "Eau et voirie", "Action sociale", "Prestataires", "Astreinte direction"]
+    },
+    industrie: {
+      label: "Industrie", badge: ["todo", "Déclinaison proposée · à valider"],
+      title: "Industrie et sites sensibles",
+      msg: "Visibilité sur les dépendances et les capacités de repli ; pilotage coordonné.",
+      pb: "Incidents sur sites, infrastructures dépendantes, équipes et ressources critiques.",
+      sc: "Panne d'énergie sur plusieurs unités ; incident technique ; effet domino sur la maintenance, la logistique et les équipes de sécurité.",
+      rs: "Unités, équipes de quart, moyens de maintenance, stocks critiques.",
+      caveat: "Piste de déclinaison : fonctionnalités disponibles et preuves produit à vérifier.",
+      nodes: ["Unités de production", "Maintenance", "Logistique", "Équipe sécurité", "Utilités énergie", "Fournisseurs"]
+    }
+  };
+  var vmap = document.getElementById("vmap"), vtext = document.getElementById("vtext"), vpanel = document.getElementById("vpanel");
+  var NS = "http://www.w3.org/2000/svg";
+  var pos = [[260,46],[440,120],[440,320],[260,396],[80,320],[80,120]];
+  function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  var currentSector = "";
+  function renderV(key){
+    var d = V[key];
+    var sp = document.getElementById("vmap-spokes"), nd = document.getElementById("vmap-nodes");
+    sp.textContent = ""; nd.textContent = "";
+    pos.forEach(function(p, i){
+      sp.appendChild(el("line", {"class":"spoke", x1:260, y1:220, x2:p[0], y2:p[1]}));
+      var g = el("g", {"class":"node"}), w = Math.max(96, d.nodes[i].length * 7.6 + 24);
+      g.appendChild(el("rect", {x: p[0] - w/2, y: p[1] - 17, width: w, height: 34, rx: 2}));
+      var tx = el("text", {x: p[0], y: p[1] + 1}); tx.textContent = d.nodes[i]; g.appendChild(tx);
+      nd.appendChild(g);
+    });
+    vmap.querySelector("title").textContent = "Le moteur KER au centre, relié aux acteurs du secteur " + d.label + " : " + d.nodes.join(", ") + ".";
+    vtext.innerHTML =
+      '<span class="badge badge--' + d.badge[0] + '">' + esc(d.badge[1]) + '</span>' +
+      '<h3>' + esc(d.title) + '</h3><p class="lede">' + esc(d.msg) + '</p>' +
+      '<dl class="vfacts"><div><dt>Problème</dt><dd>' + esc(d.pb) + '</dd></div><div><dt>Scénarios</dt><dd>' + esc(d.sc) + '</dd></div><div><dt>Ressources</dt><dd>' + esc(d.rs) + '</dd></div></dl>' +
+      '<div class="btn-row"><a class="btn btn--primary" href="#demo" data-cta="vertical" data-sector-cta="' + esc(d.label) + '">Demander une démo · ' + esc(d.label) + '</a></div>' +
+      '<p class="note vcaveat">' + esc(d.caveat) + '</p>';
+  }
+  renderV("sante");
+  tabs(document.querySelector('[data-tabs="vert"]'), function(tab){
+    var key = tab.dataset.key;
+    vpanel.setAttribute("aria-labelledby", tab.id);
+    if (reduce) renderV(key);
+    else { vmap.classList.add("is-swapping"); setTimeout(function(){ renderV(key); vmap.classList.remove("is-swapping"); }, 180); }
+    track("vertical_selected", {vertical: key});
+    setSector(V[key].label, false);
+  });
+  vtext.addEventListener("click", function(e){
+    var a = e.target.closest("[data-sector-cta]"); if (a) setSector(a.dataset.sectorCta, true);
+  });
+
+  /* ---------- 09 : secteur rappelé dans le formulaire ---------- */
+  var sel = document.getElementById("f-secteur");
+  function setSector(label, strong){
+    currentSector = label;
+    if (strong || !sel.dataset.touched) sel.value = label;
+    document.querySelectorAll(".vchip").forEach(function(c){ c.setAttribute("aria-pressed", c.dataset.sector === sel.value ? "true" : "false"); });
+  }
+  document.querySelectorAll(".vchip").forEach(function(c){
+    c.addEventListener("click", function(){ sel.dataset.touched = "1"; sel.value = c.dataset.sector; setSector(c.dataset.sector, true); });
+  });
+  sel.addEventListener("change", function(){ sel.dataset.touched = "1"; document.querySelectorAll(".vchip").forEach(function(c){ c.setAttribute("aria-pressed", c.dataset.sector === sel.value ? "true" : "false"); }); });
+
+  /* ---------- Lightbox ---------- */
+  var SHOTS = {
+    pilotage: ["__IMG_pilotage__", "Pilotage groupe : statistiques agrégées, crise en cours, synthèse IA paramétrable. Données de démonstration (étude de cas 2026, p. 7)."],
+    tableau: ["__IMG_tableau__", "Tableau de bord de crise : main courante, actions, étapes, SITREP, suivi territorial. Aperçu basse définition (p. 19)."],
+    workflow: ["__IMG_workflow__", "Workflow : étapes séquencées et validations. Aperçu basse définition (p. 19)."],
+    sitrep: ["__IMG_sitrep__", "SITREP : faits établis, actions réalisées, prochaines étapes, arbitrages. Aperçu basse définition (p. 19)."],
+    retex: ["__IMG_retex__", "RETEX : points positifs, points négatifs, recommandations. Aperçu basse définition (p. 19)."]
+  };
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img"), lbCap = document.getElementById("lb-cap"), lbFrom = null;
+  document.querySelectorAll("[data-lightbox]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = SHOTS[b.dataset.lightbox]; lbFrom = b;
+      lbImg.src = s[0]; lbImg.alt = s[1]; lbCap.textContent = s[1];
+      if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
+      track("screenshot_open", {screen: b.dataset.lightbox});
+    });
+  });
+  function closeLb(){ if (lb.close) lb.close(); else lb.removeAttribute("open"); }
+  document.getElementById("lb-close").addEventListener("click", closeLb);
+  lb.addEventListener("click", function(e){ if (e.target === lb) closeLb(); });
+  lb.addEventListener("close", function(){ if (lbFrom) lbFrom.focus(); });
+
+  /* ---------- V2 : immersion ---------- */
+  if (!reduce) document.documentElement.classList.add("pin");
+  var readbar = document.querySelector(".readbar");
+
+  // Manifeste : les mots s'allument au scroll
+  var words = [];
+  (function(){
+    var p = document.querySelector("[data-words]"); if (!p) return;
+    var nodes = Array.prototype.slice.call(p.childNodes); p.textContent = "";
+    nodes.forEach(function(n){
+      var key = n.nodeType === 1, txt = n.textContent;
+      txt.split(/(\s+)/).forEach(function(part){
+        if (!part) return;
+        if (/^\s+$/.test(part)) { p.appendChild(document.createTextNode(part)); return; }
+        var sp = document.createElement("span"); sp.className = "w" + (key ? " k" : ""); sp.textContent = part;
+        p.appendChild(sp); words.push(sp);
+      });
+    });
+  })();
+  function updateWords(){
+    var el = document.getElementById("manifeste"); if (!el || !words.length) return;
+    var r = el.getBoundingClientRect(), vh = window.innerHeight;
+    var t = Math.max(0, Math.min(1, (vh * .85 - r.top) / (r.height * .9)));
+    var n = Math.round(t * words.length * 1.1);
+    words.forEach(function(w, i){ w.classList.toggle("on", i < n); });
+  }
+
+  // Scène « personnes » épinglée
+  var peopleTrack = document.getElementById("people-track"), pslides = document.querySelectorAll(".pslide"), rails = document.querySelectorAll(".people__rail span");
+  var desk = window.matchMedia("(min-width: 901px)");
+  function updatePeople(){
+    if (reduce || !desk.matches) { pslides.forEach(function(s){ s.classList.add("is-on"); }); return; }
+    var r = peopleTrack.getBoundingClientRect(), span = r.height - window.innerHeight;
+    var t = Math.max(0, Math.min(.999, -r.top / span)), idx = Math.floor(t * 3);
+    pslides.forEach(function(s, i){ s.classList.toggle("is-on", i === idx); });
+    rails.forEach(function(s, i){
+      var f = Math.max(0, Math.min(1, t * 3 - i)); s.querySelector("i").style.setProperty("--f", f.toFixed(3)); s.classList.toggle("is-on", i === idx);
+    });
+  }
+  desk.addEventListener && desk.addEventListener("change", updatePeople);
+
+  // Ville qui s'éteint (effet domino)
+  var city = (function(){
+    var cv = document.getElementById("city"); if (!cv || !cv.getContext) return null;
+    var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    var lights = [], roads = [], ep = {x: .2, y: .58}, target = 0, cur = 0, raf = 0, visible = false;
+    for (var gx = 0; gx < 26; gx++) for (var gy = 0; gy < 12; gy++) {
+      var bx = gx / 26 + rnd() * .012, by = gy / 12 + rnd() * .02;
+      var river = Math.abs(by - (.35 + Math.sin(bx * 5) * .08)) < .045;
+      if (river) continue;
+      var k = 2 + Math.floor(rnd() * 6);
+      for (var i = 0; i < k; i++) {
+        var x = bx + rnd() * .03, y = by + rnd() * .06;
+        lights.push({x: x, y: y, s: .6 + rnd() * 1.6, w: rnd() < .78, ph: rnd() * 6.28});
+      }
+    }
+    lights.forEach(function(l){ var dx = (l.x - ep.x) * 1.6, dy = l.y - ep.y; l.d = Math.sqrt(dx*dx + dy*dy); });
+    var maxD = Math.max.apply(null, lights.map(function(l){ return l.d; }));
+    function size(){ var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); }
+    function draw(now){
+      cur += (target - cur) * .06; if (Math.abs(target - cur) < .002) cur = target;
+      var R = cur / 5 * maxD * .72, t = (now || 0) / 1000;
+      var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#0b1824"); g.addColorStop(1, "#04090e");
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      // rivière
+      ctx.strokeStyle = "rgba(60,90,115,.35)"; ctx.lineWidth = 10; ctx.beginPath();
+      for (var x = 0; x <= W; x += 8) { var y = (.35 + Math.sin(x / W * 5) * .08) * H + 14; if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.stroke();
+      lights.forEach(function(l){
+        var off = l.d < R, edge = Math.abs(l.d - R) < .05 && cur > 0 && cur < 5;
+        var x = l.x * W, y = l.y * H, a;
+        if (off) a = .06; else a = .55 + .35 * Math.sin(t * 1.5 + l.ph) * (edge ? 1 : .15);
+        if (edge && Math.sin(t * 22 + l.ph * 9) > .2) a = .1;
+        ctx.fillStyle = off ? "rgba(90,110,130," + a + ")" : (l.w ? "rgba(255,178,92," + a.toFixed(3) + ")" : "rgba(255,230,190," + a.toFixed(3) + ")");
+        ctx.fillRect(x, y, l.s * 1.6, l.s * 1.6);
+        if (!off && l.s > 1.7) { ctx.fillStyle = "rgba(255,150,60,.08)"; ctx.beginPath(); ctx.arc(x, y, 6, 0, 6.283); ctx.fill(); }
+      });
+      // front de la cascade
+      if (cur > .02) {
+        var rx = R / 1.6 * W, ry = R * H;
+        ctx.strokeStyle = "rgba(244,90,10,.75)"; ctx.lineWidth = 1.5; ctx.setLineDash([6, 6]);
+        ctx.beginPath(); ctx.ellipse(ep.x * W, ep.y * H, Math.max(1, rx), Math.max(1, ry), 0, 0, 6.283); ctx.stroke(); ctx.setLineDash([]);
+      }
+      // épicentre
+      var pr = 6 + (Math.sin(t * 3) + 1) * 4;
+      ctx.strokeStyle = "rgba(244,90,10,.9)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(ep.x * W, ep.y * H, pr, 0, 6.283); ctx.stroke();
+      ctx.fillStyle = "#f45a0a"; ctx.beginPath(); ctx.arc(ep.x * W, ep.y * H, 3.5, 0, 6.283); ctx.fill();
+      if (!reduce && visible) raf = requestAnimationFrame(draw);
+    }
+    size(); draw(0);
+    window.addEventListener("resize", function(){ size(); draw(performance.now()); });
+    if ("IntersectionObserver" in window && !reduce) new IntersectionObserver(function(en){ visible = en[0].isIntersecting; cancelAnimationFrame(raf); if (visible) raf = requestAnimationFrame(draw); }).observe(cv);
+    var names = ["situation normale", "énergie coupée", "télécoms touchées", "accès et mobilité touchés", "équipes terrain sous tension", "soins à prioriser"];
+    var status = document.getElementById("city-status");
+    return {set: function(n){ n = Math.max(0, Math.min(5, n)); if (n === target) return; target = n; status.innerHTML = "<b>Étage " + n + " / 5</b> · " + names[n]; if (reduce) { cur = n; draw(0); } }};
+  })();
+  if (reduce && city) city.set(5);
+  window.__city = city; onScroll();
+
+  // Apparitions
+  (function(){
+    if (reduce || !("IntersectionObserver" in window)) return;
+    var sel = ".band h2, .band .lede, .band .eyebrow, .read, .tier, .twin a, .chap, .cfb li, .facts li, .qa, .arch, .loop, .recap li, .form, .human, .demo-note, .heat, .city, .people__intro h2";
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }); }, {rootMargin: "0px 0px -8% 0px"});
+    document.querySelectorAll(sel).forEach(function(el){
+      if (el.closest(".hero")) return;
+      var sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.style.setProperty("--rd", Math.min(sib, 5) * .08 + "s");
+      el.classList.add("rv"); io.observe(el);
+    });
+  })();
+
+  function v2Scroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    readbar.style.setProperty("--read", h > 0 ? (window.scrollY / h).toFixed(4) : 0);
+    updateWords(); updatePeople();
+  }
+  if (!reduce) {
+    window.addEventListener("scroll", function(){ requestAnimationFrame(v2Scroll); }, {passive: true});
+    window.addEventListener("resize", v2Scroll);
+  }
+  v2Scroll();
+
+  /* ---------- Formulaire ---------- */
+  var form = document.getElementById("demo-form"), started = false;
+  var FREE = /@(gmail|googlemail|yahoo|hotmail|outlook|live|msn|icloud|me|aol|gmx|orange|wanadoo|free|sfr|laposte|neuf|bbox|proton|protonmail)\./i;
+  form.addEventListener("input", function(){ if (!started) { started = true; track("demo_form_start"); } });
+  document.getElementById("f-email").addEventListener("blur", function(){
+    var v = this.value.trim();
+    document.getElementById("h-email").textContent = v && FREE.test(v) ? "Cette adresse semble personnelle. Une adresse professionnelle nous aide à préparer la démonstration, mais vous pouvez continuer." : "";
+  });
+  var rules = [
+    ["f-prenom","e-prenom","Indiquez votre prénom."],
+    ["f-nom","e-nom","Indiquez votre nom."],
+    ["f-fonction","e-fonction","Indiquez votre fonction."],
+    ["f-org","e-org","Indiquez votre organisation."],
+    ["f-email","e-email","Indiquez un email valide, par exemple nom@organisation.fr."],
+    ["f-secteur","e-secteur","Choisissez un secteur."],
+    ["f-consent","e-consent","Cochez cette case pour que nous puissions vous répondre."]
+  ];
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var first = null;
+    rules.forEach(function(r){
+      var f = document.getElementById(r[0]), err = document.getElementById(r[1]);
+      var ok = f.type === "checkbox" ? f.checked : (f.type === "email" ? /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim()) : f.value.trim() !== "");
+      f.setAttribute("aria-invalid", ok ? "false" : "true"); err.textContent = ok ? "" : r[2];
+      if (!ok && !first) first = f;
+    });
+    if (first) { first.focus(); track("demo_form_error"); return; }
+    if (document.getElementById("f-site").value) return; // pot de miel anti-spam
+    track("demo_form_submit", {sector: sel.value});
+    document.getElementById("form-body").hidden = true;
+    var done = document.getElementById("form-done"); done.hidden = false;
+    document.getElementById("done-text").textContent = "L'équipe KER reviendra vers vous pour convenir d'une démonstration adaptée au secteur " + sel.value + ".";
+    done.focus();
+  });
+})();
+</script>
