@@ -1,19 +1,22 @@
-# KER — landing page 2026
+# KER — landing page 2026 (prototype v0.3)
 
-Prototype de validation de la landing page immersive KER (cahier des charges v1.2 du 30 octobre 2026).
+Site statique multipage (HTML/CSS/JS, sans framework), déployé sur Netlify.
 
-- `src/index.src.html` : source de la page (HTML, CSS et JS), avec des marqueurs `__IMG_nom__`.
-- `assets/` : logos, captures produit et photos, inlinés au build.
-- `tools/build.py` : génère `public/index.html`, page unique autonome.
-- `public/` : dossier publié tel quel par Netlify (relancer le build et committer après chaque modification).
+## Structure
+- `src/pages/` : pages (`index.html`, `canicule.html`, `panne-electrique.html`) avec front matter (`title`, `description`, `base`).
+- `src/partials/` : `header.html`, `footer.html` (inclus via `{{> header}}`, `{{> footer}}`).
+- `src/ker.css`, `src/ker.js` : styles et scripts communs.
+- `assets/` : images (copiées dans `img/`).
+- `tools/build.py` : génère `public/` (site Netlify) et `artifact/` (aperçu Claude, ignoré par git).
 
+## Build
 ```
 python3 tools/build.py
 ```
+Puis commiter `public/`. Netlify publie `public` sans commande de build (`netlify.toml`).
 
-## Points provisoires
+## Formulaire
+Netlify Forms (`demande-demo`) : activer la détection des formulaires dans les réglages du site Netlify. Le message de succès ne s'affiche qu'après une réponse positive du serveur.
 
-- Logo et couleurs extraits de la planche PNG : à remplacer par les fichiers vectoriels maîtres.
-- Photos générées par IA (personnes et lieux fictifs) ; Industrie en illustration SVG.
-- Captures p. 19 en basse définition ; écrans cartographie, simulation J−1 et déclenchement manquants.
-- Formulaire sans envoi réel : routage CRM, mentions légales et politique de confidentialité à fournir.
+## Points à valider
+Mention « Entreprise française · Basée en France », garanties techniques (CTO), pages légales, visuels IA, logo vectoriel.

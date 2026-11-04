@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Étude de cas Panne électrique — KER</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Scénario simulé KER : comprendre et anticiper les effets en cascade d'une panne électrique, de l'énergie jusqu'aux soins.">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/ker.css">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="readbar" aria-hidden="true"></div>
+<header class="header">
+  <div class="header__in">
+    <a class="header__logo" href="./#top" aria-label="KER, accueil"><img src="img/logo-word.webp" alt="KER" width="632" height="158"></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="./#fonctionnement" data-nav="fonctionnement">Fonctionnement</a>
+      <a href="./#plateforme" data-nav="plateforme">Plateforme</a>
+      <a href="./#cas" data-nav="cas">Études de cas</a>
+      <a href="./#secteurs" data-nav="secteurs">Secteurs</a>
+    </nav>
+    <a class="btn btn--primary header__cta" href="./#demo" data-cta="header">Demander une démonstration</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="band band--dark casehero" data-progress aria-labelledby="h-case">
+  <div class="casehero__bg" aria-hidden="true"><img src="img/photo-panne.webp" alt="" width="1672" height="465" fetchpriority="high"></div>
+  <div class="wrap">
+    <a class="crumb" href="./#cas">← Retour aux études de cas</a>
+    <p class="eyebrow"><b>Étude de cas 2</b> Panne électrique</p>
+    <h1 id="h-case">Comprendre et anticiper les effets en cascade d'une rupture d'alimentation.</h1>
+    <p class="lede">Une panne électrique peut perturber les télécommunications, l'accès aux sites, la mobilité des équipes et certains services essentiels. Ce scénario montre comment rendre les dépendances visibles pour éclairer les priorités de réponse.</p>
+    <span class="badge badge--demo">Scénario simulé</span>
+  </div>
+</section>
+
+<section class="band band--deep" id="domino" data-progress aria-labelledby="h-domino">
+  <div class="wrap">
+    <p class="eyebrow"><b>Chaîne illustrative</b> Énergie → télécommunications → accès et mobilité → équipes → services et soins</p>
+    <h2 id="h-domino">Une crise ne reste jamais là où elle commence.</h2>
+    <p class="lede">Faites défiler : la panne s'étend, étage par étage. Pour chacun, KER rend visibles la dépendance et les options de repli. Les responsables choisissent les priorités.</p>
+    <div class="city" aria-hidden="true">
+      <canvas id="city"></canvas>
+      <div class="city__hud"><span>Territoire · vue de nuit</span><span id="city-status"><b>Étage 0 / 5</b> · situation normale</span></div>
+    </div>
+
+    <ol class="domino" id="domino-list">
+      <li class="tier" data-tier="1">
+        <div class="tier__n">Étage 1<i></i></div>
+        <h3>Énergie</h3>
+        <p class="tier__what">Coupure du réseau sur une partie du territoire.</p>
+        <dl><div><dt>Dépendance</dt><dd>Sites, équipements médicaux et chaîne du froid.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Autonomie des groupes électrogènes, sites prioritaires.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="2">
+        <div class="tier__n">Étage 2<i></i></div>
+        <h3>Télécoms</h3>
+        <p class="tier__what">Les relais perdent leur alimentation.</p>
+        <dl><div><dt>Dépendance</dt><dd>Téléassistance, appels et messageries des équipes.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Canaux de secours, consignes diffusées en amont.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="3">
+        <div class="tier__n">Étage 3<i></i></div>
+        <h3>Accès et mobilité</h3>
+        <p class="tier__what">Feux, éclairage, carburant : les déplacements ralentissent.</p>
+        <dl><div><dt>Dépendance</dt><dd>Tournées à domicile et transferts entre sites.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Tournées repriorisées, itinéraires alternatifs.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="4">
+        <div class="tier__n">Étage 4<i></i></div>
+        <h3>Équipes terrain</h3>
+        <p class="tier__what">Les intervenants ne peuvent plus tout couvrir.</p>
+        <dl><div><dt>Dépendance</dt><dd>Effectifs disponibles et astreintes.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Réaffectation des astreintes, renforts entre sites.</dd></div></dl>
+      </li>
+      <li class="tier" data-tier="5">
+        <div class="tier__n">Étage 5<i></i></div>
+        <h3>Soins</h3>
+        <p class="tier__what">Les personnes dépendantes d'un équipement deviennent prioritaires.</p>
+        <dl><div><dt>Dépendance</dt><dd>Continuité des soins en EHPAD, SAD, SSIAD et SMR.</dd></div>
+        <div><dt>Options de repli</dt><dd class="repli">Liste des personnes à risque, transferts vers un site alimenté.</dd></div></dl>
+      </li>
+    </ol>
+    <div class="domino-foot">
+      <p class="note">KER rend les cascades visibles et aide à prioriser. Il ne commande pas les réseaux d'énergie, de télécommunication ou de transport, et ne décide pas à la place des responsables. Scénario simulé : la propagation des effets n'est pas systématique.</p>
+      <div><a class="btn btn--ghost" href="./#demo" data-cta="case_panne_demo">Demander une démonstration</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark">
+  <div class="wrap caseend">
+    <div><p class="eyebrow">Autre étude de cas</p><h2 style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.2rem)">Canicule : anticiper avant le pic de chaleur.</h2></div>
+    <div class="btn-row"><a class="btn btn--ghost" href="canicule.html">Voir l'étude de cas →</a><a class="btn btn--primary" href="./#demo">Demander une démonstration</a></div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="footer__in">
+    <img src="img/logo-word.webp" alt="KER" width="632" height="158">
+    <ul>
+      <li><a href="./#fonctionnement">Fonctionnement</a></li>
+      <li><a href="./#plateforme">Plateforme</a></li>
+      <li><a href="./#cas">Études de cas</a></li>
+      <li><a href="./#secteurs">Secteurs</a></li>
+      <li><a href="./#demo">Démonstration</a></li>
+    </ul>
+    <ul>
+      <li class="todo">Mentions légales (à fournir)</li>
+      <li class="todo">Politique de confidentialité (à fournir)</li>
+      <li class="todo">Cookies (à fournir)</li>
+    </ul>
+    <p class="footer__proto">KER · Krisis Emergency Response · Prototype de validation v0.3, novembre 2026. Captures : données de démonstration. Visuels générés par IA, à valider. Logo et couleurs provisoires, issus de la planche validée, en attente des fichiers vectoriels.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta"><a class="btn btn--primary" href="./#demo" data-cta="sticky_mobile">Demander une démonstration</a></div>
+
+<dialog class="lb" id="lb" aria-label="Capture agrandie">
+  <div class="lb__in">
+    <div class="lb__bar"><p class="lb__cap" id="lb-cap"></p><button class="lb__close" type="button" id="lb-close">Fermer</button></div>
+    <div class="lb__img"><img id="lb-img" src="" alt=""></div>
+  </div>
+</dialog>
+
+
+<script src="js/ker.js" defer></script>
+</body>
+</html>

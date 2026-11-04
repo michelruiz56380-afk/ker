@@ -1,0 +1,92 @@
+---
+title: Étude de cas Canicule — KER
+description: Scénario simulé KER : anticiper une canicule sur plusieurs sites de santé, de J−5 à J0 + 2 h. KER éclaire, les équipes décident.
+base: ./
+---
+{{> header}}
+<main id="main">
+<section class="band band--dark casehero" data-progress aria-labelledby="h-case">
+  <div class="casehero__bg" aria-hidden="true"><img src="img/photo-canicule.webp" alt="" width="1672" height="462" fetchpriority="high"></div>
+  <div class="wrap">
+    <a class="crumb" href="./#cas">← Retour aux études de cas</a>
+    <p class="eyebrow"><b>Étude de cas 1</b> Canicule · Santé</p>
+    <h1 id="h-case">Anticiper les tensions sur plusieurs sites avant le pic de chaleur.</h1>
+    <p class="lede">Une vigilance canicule conduit à rapprocher les risques prévisibles des vulnérabilités et des ressources de chaque site. Le scénario illustre le passage de l'anticipation à la décision puis au suivi des actions.</p>
+    <span class="badge badge--demo">Scénario simulé · données de démonstration</span>
+  </div>
+</section>
+
+<section class="band band--light" id="canicule" aria-labelledby="h-tl">
+  <div class="wrap">
+    <p class="eyebrow"><b>Chronologie</b> J−5 → J0 + 2 h</p>
+    <h2 id="h-tl" style="max-width:24ch">De l'anticipation à la décision, puis au suivi des actions.</h2>
+    <p class="claim" style="margin-top:16px">À chaque étape, KER éclaire la situation. L'équipe décide.</p>
+    <div class="timeline">
+      <nav class="rail" aria-label="Étapes du scénario canicule">
+        <ol>
+          <li data-rail="j5"><a href="#j5"><b>J−5</b><span>Alerte et vulnérabilités</span></a></li>
+          <li data-rail="j1"><a href="#j1"><b>J−1</b><span>Besoins et ressources</span></a></li>
+          <li data-rail="j0"><a href="#j0"><b>J0</b><span>Déclenchement</span></a></li>
+          <li data-rail="j02"><a href="#j02"><b>J0 + 2 h</b><span>Suivi des indicateurs</span></a></li>
+        </ol>
+      </nav>
+      <div class="chapters-c">
+        <article class="chap" id="j5" data-chap="j5">
+          <div class="chap__head"><span class="chap__t">J−5</span><h3>L'alerte rencontre la carte des fragilités</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> une alerte canicule croisée avec la vulnérabilité de chaque site, pour repérer où la tension apparaîtra.</p>
+          <p class="decide"><b>Ce que l'équipe décide</b>Les responsables choisissent les sites à surveiller et les premières mesures préventives.</p>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : capture cartographie territoriale et seuils, à intégrer">
+            <strong>Capture à intégrer : cartographie et seuils</strong>
+            <span class="note">Étude de cas 2026, p. 9, 11–13 · export HD natif requis</span>
+          </div>
+        </article>
+        <article class="chap" id="j1" data-chap="j1">
+          <div class="chap__head"><span class="chap__t">J−1</span><h3>Confronter besoins et ressources</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> les besoins prévisibles face aux ressources mobilisables, site par site, avant le pic de chaleur.</p>
+          <p class="decide"><b>Ce que l'équipe décide</b>La cellule valide les renforts, les transferts possibles et les priorités entre sites.</p>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : capture simulation J−1, à intégrer">
+            <strong>Capture à intégrer : simulation J−1</strong>
+            <span class="note">Étude de cas 2026, p. 13–14 · chiffres à signaler comme illustratifs</span>
+          </div>
+        </article>
+        <article class="chap" id="j0" data-chap="j0">
+          <div class="chap__head"><span class="chap__t">J0</span><h3>Un événement aggravant, une décision</h3></div>
+          <p class="chap__cap"><strong>Ce que l'utilisateur décide :</strong> la cellule déclenche le pilotage de crise. Les sites concernés et le niveau apparaissent aussitôt pour tout le groupe.</p>
+          <p class="decide"><b>Ce que l'équipe décide</b>Le déclenchement est un acte humain : la cellule décide d'ouvrir le pilotage de crise.</p>
+          <button class="shotbtn" type="button" data-lightbox="pilotage" aria-label="Agrandir la capture : crise Canicule active dans le pilotage groupe">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Pilotage groupe · crise active</span></div>
+            <img src="img/pilotage.webp" alt="" width="1000" height="638" loading="lazy"></div>
+          </button>
+          <div class="placeholder" role="img" aria-label="Emplacement réservé : formulaire de déclenchement direct, à intégrer" style="aspect-ratio:21/6">
+            <strong>Capture à intégrer : déclenchement direct (4 informations)</strong>
+            <span class="note">Étude de cas 2026, p. 17</span>
+          </div>
+        </article>
+        <article class="chap" id="j02" data-chap="j02">
+          <div class="chap__head"><span class="chap__t">J0 + 2 h</span><h3>Les indicateurs évoluent, le groupe suit</h3></div>
+          <p class="chap__cap"><strong>Ce que l'interface montre :</strong> main courante, actions en cours, étapes terminées et SITREP publiés, avec le suivi territorial de chaque site.</p>
+          <p class="decide"><b>Ce que l'équipe décide</b>Les responsables ajustent les priorités et valident chaque étape du plan d'action.</p>
+          <button class="shotbtn" type="button" data-lightbox="tableau" aria-label="Agrandir la capture : tableau de bord de la crise">
+            <div class="frame"><div class="frame__bar"><i></i><i></i><i></i><span>Pilotage · Canicule · tableau de bord</span></div>
+            <img src="img/tableau.webp" alt="" width="680" height="260" loading="lazy"></div>
+          </button>
+          <p class="lowres"><span class="badge badge--todo">Aperçu basse définition</span><span class="note" style="color:var(--ink-soft)">Export HD à fournir</span></p>
+        </article>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      <span class="badge badge--demo">Simulation</span>
+      <p>Les données, noms de sites et indicateurs de ce scénario sont fictifs. Ils illustrent le fonctionnement du produit et ne constituent ni des résultats clients ni une preuve de performance.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark">
+  <div class="wrap caseend">
+    <div><p class="eyebrow">Étude de cas suivante</p><h2 style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.2rem)">Panne électrique : les effets en cascade.</h2></div>
+    <div class="btn-row"><a class="btn btn--ghost" href="panne-electrique.html">Voir l'étude de cas →</a><a class="btn btn--primary" href="./#demo" data-cta="case_canicule_demo">Demander une démonstration</a></div>
+  </div>
+</section>
+</main>
+{{> footer}}
