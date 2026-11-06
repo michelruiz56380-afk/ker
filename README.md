@@ -1,11 +1,11 @@
-# KER — landing page 2026 (prototype v0.3)
+# KER — landing page 2026 (prototype v0.4)
 
 Site statique multipage (HTML/CSS/JS, sans framework), déployé sur Netlify.
 
 ## Structure
-- `src/pages/` : pages (`index.html`, `canicule.html`, `panne-electrique.html`) avec front matter (`title`, `description`, `base`).
+- `src/pages/` : pages (`index.html`, `canicule.html`, `panne-electrique.html`, `mentions-legales.html`, `confidentialite.html`, `cookies.html`) avec front matter (`title`, `description`, `base`). Les pages légales sont générées depuis les docx fournis par KER (annexes internes exclues).
 - `src/partials/` : `header.html`, `footer.html` (inclus via `{{> header}}`, `{{> footer}}`).
-- `src/ker.css`, `src/ker.js` : styles et scripts communs.
+- `src/ker.css`, `src/ker.js`, `src/fonts.css` : styles, scripts et polices (hébergées dans `assets/fonts`, aucun appel à Google Fonts).
 - `assets/` : images (copiées dans `img/`).
 - `tools/build.py` : génère `public/` (site Netlify) et `artifact/` (aperçu Claude, ignoré par git).
 

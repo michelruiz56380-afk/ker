@@ -1,3 +1,119 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100% 125%;
+  font-display: swap;
+  src: url(../fonts/k3kQo8UDI-1M0wlSfdfoLnnA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100% 125%;
+  font-display: swap;
+  src: url(../fonts/k3kQo8UDI-1M0wlSfdnoLg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/-F63fjptAgt5VM-kVkqdyU8n1iEq129k.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgtIU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbABA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbABA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbABA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(../fonts/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 /* Layout : récit vertical alternant scènes sombres immersives (bleu-noir) et panneaux de lecture clairs ;
    grille 12 colonnes desktop / 4 colonnes mobile ; l'orange est réservé aux actions, connexions et inflexions.
    Thème volontairement unique : l'alternance sombre/clair est imposée par le cahier des charges (§4.2). */
@@ -493,7 +609,7 @@ dialog.lb::backdrop{background:rgba(6,14,20,.88)}
 .hero h1{max-width:16ch}
 .hero__hook{font-family:var(--f-display);font-stretch:108%;font-weight:600;font-size:clamp(1.15rem,1rem + .8vw,1.6rem);margin-top:1.3rem;color:var(--white);max-width:36ch}
 .hero__sub{max-width:62ch}
-.hero__pano{position:relative;margin-top:clamp(-120px,-8vw,-40px);margin-inline:calc(-1 * max(16px, env(safe-area-inset-left,0px)));aspect-ratio:1722 / 913;max-height:760px;overflow:hidden;z-index:0}
+.hero__pano{position:relative;margin-top:clamp(-500px,-28vw,-60px);margin-inline:calc(-1 * max(16px, env(safe-area-inset-left,0px)));height:clamp(300px,54vw,900px);overflow:hidden;z-index:0}
 .hero__pano img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 60%;transform-origin:40% 70%;transform:scale(calc(1.02 + var(--p,0) * .22));will-change:transform}
 .hero__pano::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--night) 0%,rgba(16,34,48,.55) 18%,rgba(16,34,48,0) 38%,rgba(16,34,48,0) 80%,var(--night) 100%)}
 .hero>.wrap{position:relative;z-index:2}
@@ -640,3 +756,42 @@ dialog.lb::backdrop{background:rgba(6,14,20,.88)}
 .decide b{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-ink);display:block;margin-bottom:2px;font-weight:500}
 .band--deep .decide{background:rgba(255,255,255,.04);color:#dde5eb}
 .band--deep .decide b{color:var(--orange)}
+
+/* ===== V3.1 — secteurs sur une image commune ===== */
+.sectors{position:relative}
+.sectors__band{display:none}
+.sector__img,.sector--main .sector__img{aspect-ratio:auto;height:clamp(200px,22vw,290px)}
+.sector__img img{object-position:var(--fx,50%) 55%}
+.sector__body h3 small{display:block;margin-top:4px;font-family:var(--f-mono);font-size:var(--t-label);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.badge--avail{color:var(--state-green);justify-self:start}
+.badge--avail::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+@media (min-width:1001px){
+  .sectors.is-pano{gap:28px}
+  .sectors.is-pano .sectors__band{display:block;position:absolute;left:-6px;right:-6px;top:0;height:var(--ih);overflow:hidden;border-radius:4px;z-index:0}
+  .sectors.is-pano .sectors__band img{position:absolute;left:6px;top:var(--iy);width:var(--sw);max-width:none;height:auto;filter:blur(6px) brightness(.62) saturate(.85);transform:scale(1.01)}
+  .sectors.is-pano .sector{position:relative;z-index:1}
+  .sectors.is-pano .sector__img img{position:absolute;left:calc(-1 * var(--x,0px));top:var(--iy);width:var(--sw);max-width:none;height:auto;object-fit:fill}
+  .sectors.is-pano .sector{border-top:0}
+}
+
+/* ===== Pages légales ===== */
+.legal{max-width:76ch}
+.legal h1{font-size:clamp(2rem,1.4rem + 2.4vw,3.2rem);margin-bottom:.6em}
+.legal h2{font-size:1.35rem;margin:2.2em 0 .6em;padding-top:1.2em;border-top:1px solid var(--line)}
+.legal h3{font-size:1.05rem;margin:1.6em 0 .4em}
+.legal p,.legal li{color:var(--ink-soft);line-height:1.65}
+.legal p+p{margin-top:.8em}
+.legal ul{margin:.6em 0 .8em 1.2em;display:grid;gap:.35em;list-style:disc}
+.legal strong{color:var(--ink)}
+.legal table{width:100%;border-collapse:collapse;margin:1em 0;font-size:.95rem}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+.legal th{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.legal .todo{color:var(--state-amber);background:rgba(240,179,90,.12);padding:0 .25em;border-radius:2px;font-weight:500}
+.legal__meta{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.5em}
+.legal__draft{border-left:3px solid var(--state-amber);background:var(--paper,#f5f3ef);padding:14px 18px;margin:0 0 2em;font-size:.92rem;color:var(--ink-soft)}
+.legal nav.legal__toc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:2em;font-size:.92rem}
+.legal nav.legal__toc a{color:var(--orange-ink)}
+.footer a.is-legal{color:inherit}
+.badge--2027{white-space:normal;line-height:1.35}
+.hero > .wrap{z-index:3}
+.hero__pano::before{background:linear-gradient(180deg,var(--night) 0%,rgba(16,34,48,.7) 22%,rgba(16,34,48,.15) 45%,rgba(16,34,48,0) 60%,rgba(16,34,48,0) 82%,var(--night) 100%),linear-gradient(90deg,rgba(16,34,48,.55) 0%,rgba(16,34,48,0) 45%)}

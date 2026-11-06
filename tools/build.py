@@ -10,14 +10,13 @@ import pathlib, re, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
-css = (SRC / "ker.css").read_text(encoding="utf-8")
+# Polices hébergées avec le site (pas d'appel à Google Fonts) : chemins relatifs à css/ker.css.
+css = (SRC / "fonts.css").read_text(encoding="utf-8") + (SRC / "ker.css").read_text(encoding="utf-8")
+css_inline = css.replace("../fonts/", "fonts/")
 js = (SRC / "ker.js").read_text(encoding="utf-8")
 partials = {p.stem: p.read_text(encoding="utf-8") for p in (SRC / "partials").glob("*.html")}
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800'
-         '&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">')
+FONTS = '<link rel="preload" href="%sfonts/k3kQo8UDI-1M0wlSfdnoLg.woff2" as="font" type="font/woff2" crossorigin>'
 
 
 def parse(path):
@@ -34,11 +33,11 @@ def head(meta):
     return ("<title>%s</title>\n" % meta["title"]
             + '<meta name="claude:viewport-fit-sides" content="cover">\n'
             + '<meta name="description" content="%s">\n' % meta["description"]
-            + '<link rel="icon" type="image/png" href="img/icon.png">\n' + FONTS)
+            + '<link rel="icon" type="image/png" href="img/icon.png">\n' + FONTS % "")
 
 
 def full(meta, body, inline):
-    style = "<style>\n%s</style>" % css if inline else '<link rel="stylesheet" href="css/ker.css">'
+    style = "<style>\n%s</style>" % css_inline if inline else '<link rel="stylesheet" href="css/ker.css">'
     script = "<script>\n%s</script>" % js if inline else '<script src="js/ker.js" defer></script>'
     return ('<!doctype html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
@@ -51,7 +50,9 @@ for out in ("public", "artifact"):
         shutil.rmtree(d)
     (d / "img").mkdir(parents=True)
     for f in (ROOT / "assets").iterdir():
-        shutil.copy(f, d / "img" / f.name)
+        if f.is_file():
+            shutil.copy(f, d / "img" / f.name)
+    shutil.copytree(ROOT / "assets" / "fonts", d / "fonts")
 (ROOT / "public" / "css").mkdir()
 (ROOT / "public" / "js").mkdir()
 (ROOT / "public" / "css" / "ker.css").write_text(css, encoding="utf-8")
@@ -62,7 +63,7 @@ for page in sorted((SRC / "pages").glob("*.html")):
     (ROOT / "public" / page.name).write_text(full(meta, body, False), encoding="utf-8")
     if page.name == "index.html":
         # L'aperçu Claude fournit lui-même doctype, head et body autour de la page d'accueil.
-        frag = head(meta) + "\n<style>\n%s</style>\n" % css + body + "\n<script>\n%s</script>\n" % js
+        frag = head(meta) + "\n<style>\n%s</style>\n" % css_inline + body + "\n<script>\n%s</script>\n" % js
         (ROOT / "artifact" / page.name).write_text(frag, encoding="utf-8")
     else:
         (ROOT / "artifact" / page.name).write_text(full(meta, body, True), encoding="utf-8")

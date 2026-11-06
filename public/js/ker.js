@@ -331,4 +331,23 @@
       })
       .then(function(){ submit.removeAttribute("aria-busy"); submit.disabled = false; });
   });
+  /* ---------- Secteurs : une seule image partagée entre les trois blocs ---------- */
+  var pano = document.querySelector(".sectors[data-pano]");
+  if (pano) {
+    var layoutPano = function(){
+      var cards = pano.querySelectorAll(".sector");
+      var on = window.innerWidth > 1000 && cards.length && cards[1].offsetTop === cards[0].offsetTop;
+      pano.classList.toggle("is-pano", !!on);
+      if (!on) return;
+      var sw = pano.clientWidth, ih = cards[0].querySelector(".sector__img").offsetHeight;
+      var h = sw * 941 / 1672, iy = -Math.min(h * .27, Math.max(0, h - ih));
+      pano.style.setProperty("--sw", sw + "px");
+      pano.style.setProperty("--ih", ih + "px");
+      pano.style.setProperty("--iy", iy + "px");
+      Array.prototype.forEach.call(cards, function(c){ c.style.setProperty("--x", c.offsetLeft + "px"); });
+    };
+    layoutPano();
+    window.addEventListener("resize", layoutPano);
+    window.addEventListener("load", layoutPano);
+  }
 })();
